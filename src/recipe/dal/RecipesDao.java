@@ -15,7 +15,6 @@ import recipe.model.Recipes;
 import recipe.model.Users;
 
 
-
 public class RecipesDao {
 	protected ConnectionManager connectionManager;
 
@@ -206,5 +205,31 @@ public class RecipesDao {
 				}
 			}
 			return list;
+	}
+	
+	public Recipes delete(Recipes recipe) throws SQLException {
+		String deleteRecipe = "DELETE FROM Recipes WHERE RecipeId=?;";
+		Connection connection = null;
+		PreparedStatement deleteStmt = null;
+		try {
+			connection = connectionManager.getConnection();
+			deleteStmt = connection.prepareStatement(deleteRecipe);
+			deleteStmt.setInt(1, recipe.getRecipeId());
+			int affectedRows = deleteStmt.executeUpdate();	
+			if (affectedRows == 0) {
+				throw new SQLException("No records available to delete for RecipeId =" + recipe.getRecipeId());
+			}
+			return null;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(deleteStmt != null) {
+				deleteStmt.close();
+			}
+		}
 	}
 }
