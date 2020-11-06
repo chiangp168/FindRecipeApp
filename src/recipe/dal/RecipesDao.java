@@ -6,15 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import recipe.dal.ConnectionManager;
 import recipe.model.Recipes;
 import recipe.model.Users;
-import review.dal.SitDownRestaurantsDao;
-import review.dal.UsersDao;
-import review.model.Reservations;
-import review.model.SitDownRestaurants;
 
 
 
@@ -124,4 +122,46 @@ public class RecipesDao {
 			return null;
 	}
 	
+	public List<Recipes> getRecipesByRecipeName(String recipeName) throws SQLException{
+		List<Recipes> list = new ArrayList<Recipes>();
+		String selectRecipe =
+				"SELECT * FROM Recipes WHERE RecipeName =?;";
+			Connection connection = null;
+			PreparedStatement selectStmt = null;
+			ResultSet results = null;
+			try {
+				connection = connectionManager.getConnection();
+				selectStmt = connection.prepareStatement(selectRecipe);
+				selectStmt.setString(1, recipeName);
+				results = selectStmt.executeQuery();
+				
+				while(results.next()) {
+					int rsrecipeId = results.getInt("RecipeId");
+					String rsrecipeName = results.getString("RecipeName");
+					int timeToCook = results.getInt("TimeToCook");
+					int numOfStep = results.getInt("NumOfStep");
+					
+					String userName = results.getString("UserName");
+					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao is done
+					Users rsuser = usersDao.getUserByUserName(userName);//needs double check when UsersDao is done
+					
+					Recipes rsRecipe = new Recipes(rsrecipeId, rsrecipeName, rsuser, timeToCook, numOfStep);
+					list.add(rsRecipe);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw e;
+			} finally {
+				if(connection != null) {
+					connection.close();
+				}
+				if(selectStmt != null) {
+					selectStmt.close();
+				}
+				if(results != null) {
+					results.close();
+				}
+			}
+			return list;
+	}
 }
