@@ -207,6 +207,34 @@ public class RecipesDao {
 			return list;
 	}
 	
+	
+	public Recipes updateByTimeToCook(Recipes recipe, int newTimeToCook) throws SQLException {
+		String updateRecipe = "UPDATE Recipes set TimeToCook=? where RecipeId=?;";
+		Connection connection = null;
+		PreparedStatement updateStmt = null;
+		
+		try {
+			connection = connectionManager.getConnection();
+			updateStmt = connection.prepareStatement(updateRecipe);
+			updateStmt.setInt(1, newTimeToCook);
+			updateStmt.setInt(2, recipe.getRecipeId());
+			
+			updateStmt.executeUpdate();
+			recipe.setTimeToCook(newTimeToCook);
+			return recipe;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(updateStmt != null) {
+				updateStmt.close();
+			}
+		}
+	}
+	
 	public Recipes delete(Recipes recipe) throws SQLException {
 		String deleteRecipe = "DELETE FROM Recipes WHERE RecipeId=?;";
 		Connection connection = null;
