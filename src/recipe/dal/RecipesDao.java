@@ -164,17 +164,17 @@ public class RecipesDao {
 			return list;
 	}
 	
-	public List<Recipes> getRecipesByUserName(String userName) throws SQLException{
+	public List<Recipes> getRecipesByUserId(int userId) throws SQLException{
 		List<Recipes> list = new ArrayList<Recipes>();
 		String selectRecipe =
-				"SELECT * FROM Recipes WHERE userName =?;";
+				"SELECT * FROM Recipes WHERE userId =?;";
 			Connection connection = null;
 			PreparedStatement selectStmt = null;
 			ResultSet results = null;
 			try {
 				connection = connectionManager.getConnection();
 				selectStmt = connection.prepareStatement(selectRecipe);
-				selectStmt.setString(1, userName);
+				selectStmt.setInt(1, userId);
 				results = selectStmt.executeQuery();
 				
 				while(results.next()) {
@@ -183,9 +183,9 @@ public class RecipesDao {
 					int timeToCook = results.getInt("TimeToCook");
 					int numOfStep = results.getInt("NumOfStep");
 					
-					String rsuserName = results.getString("UserName");
+					int rsuserId = results.getInt("userId");
 					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao is done
-					Users rsuser = usersDao.getUserByUserName(rsuserName);//needs double check when UsersDao is done
+					Users rsuser = usersDao.getUserByUserName(rsuserId);//needs double check when UsersDao is done
 					
 					Recipes rsRecipe = new Recipes(rsrecipeId, rsrecipeName, rsuser, timeToCook, numOfStep);
 					list.add(rsRecipe);
