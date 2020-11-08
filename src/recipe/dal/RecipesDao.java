@@ -32,7 +32,7 @@ public class RecipesDao {
 	
 	public Recipes create(Recipes recipe) throws SQLException {
 		String insertRecipe =
-				"INSERT INTO Recipes(recipeName, userName, timeToCook, numOfStep) " +
+				"INSERT INTO Recipes(RecipeName, UserId, TimeToCook, NumOfStep) " +
 				"VALUES(?,?,?,?);";
 			Connection connection = null;
 			PreparedStatement insertStmt = null;
@@ -44,7 +44,7 @@ public class RecipesDao {
 					Statement.RETURN_GENERATED_KEYS);
 				
 				insertStmt.setString(1, recipe.getRecipeName());
-				insertStmt.setString(2, recipe.getUser().getUserName());
+				insertStmt.setInt(2, recipe.getUser().getUserId());//needs double check when Users is done
 				insertStmt.setInt(3, recipe.getTimeToCook());
 				insertStmt.setInt(4, recipe.getNumOfStep());
 				
@@ -97,9 +97,9 @@ public class RecipesDao {
 					int timeToCook = results.getInt("TimeToCook");
 					int numOfStep = results.getInt("NumOfStep");
 					
-					String userName = results.getString("UserName");
+					int userId = results.getInt("UserId");
 					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao is done
-					Users rsuser = usersDao.getUserByUserName(userName);//needs double check when UsersDao is done
+					Users rsuser = usersDao.getUsersByUserId(userId);//needs double check when UsersDao is done
 					
 					Recipes rsRecipe = new Recipes(rsrecipeId, recipeName, rsuser, timeToCook, numOfStep);
 					return rsRecipe;
@@ -140,9 +140,9 @@ public class RecipesDao {
 					int timeToCook = results.getInt("TimeToCook");
 					int numOfStep = results.getInt("NumOfStep");
 					
-					String userName = results.getString("UserName");
+					int userId = results.getInt("UserId");
 					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao is done
-					Users rsuser = usersDao.getUserByUserName(userName);//needs double check when UsersDao is done
+					Users rsuser = usersDao.getUsersByUserId(userId);//needs double check when UsersDao is done
 					
 					Recipes rsRecipe = new Recipes(rsrecipeId, rsrecipeName, rsuser, timeToCook, numOfStep);
 					list.add(rsRecipe);
@@ -167,7 +167,7 @@ public class RecipesDao {
 	public List<Recipes> getRecipesByUserId(int userId) throws SQLException{
 		List<Recipes> list = new ArrayList<Recipes>();
 		String selectRecipe =
-				"SELECT * FROM Recipes WHERE userId =?;";
+				"SELECT * FROM Recipes WHERE UserId =?;";
 			Connection connection = null;
 			PreparedStatement selectStmt = null;
 			ResultSet results = null;
@@ -183,9 +183,57 @@ public class RecipesDao {
 					int timeToCook = results.getInt("TimeToCook");
 					int numOfStep = results.getInt("NumOfStep");
 					
-					int rsuserId = results.getInt("userId");
+					int rsuserId = results.getInt("UserId");
 					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao is done
-					Users rsuser = usersDao.getUserByUserName(rsuserId);//needs double check when UsersDao is done
+					Users rsuser = usersDao.getUsersByUserId(rsuserId);//needs double check when UsersDao is done
+					
+					Recipes rsRecipe = new Recipes(rsrecipeId, rsrecipeName, rsuser, timeToCook, numOfStep);
+					list.add(rsRecipe);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw e;
+			} finally {
+				if(connection != null) {
+					connection.close();
+				}
+				if(selectStmt != null) {
+					selectStmt.close();
+				}
+				if(results != null) {
+					results.close();
+				}
+			}
+			return list;
+	}
+	
+	public List<Recipes> getRecipesByUserName(String userName) throws SQLException{
+		List<Recipes> list = new ArrayList<Recipes>();
+		String selectRecipe =
+				"select RecipeName, RecipeId, TimeToCook, NumOfStep, Recipes.UserId, Person.UserName "
+				+ "from " 
+				+ "Recipes inner join "
+				+ "Person "
+				+ "on Recipes.UserId = Person.UserId "
+				+ "where UserName = ?";
+			Connection connection = null;
+			PreparedStatement selectStmt = null;
+			ResultSet results = null;
+			try {
+				connection = connectionManager.getConnection();
+				selectStmt = connection.prepareStatement(selectRecipe);
+				selectStmt.setString(1, userName);
+				results = selectStmt.executeQuery();
+				
+				while(results.next()) {
+					int rsrecipeId = results.getInt("RecipeId");
+					String rsrecipeName = results.getString("RecipeName");
+					int timeToCook = results.getInt("TimeToCook");
+					int numOfStep = results.getInt("NumOfStep");
+					
+					int rsuserId = results.getInt("UserId");
+					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao is done
+					Users rsuser = usersDao.getUsersByUserId(rsuserId);//needs double check when UsersDao is done
 					
 					Recipes rsRecipe = new Recipes(rsrecipeId, rsrecipeName, rsuser, timeToCook, numOfStep);
 					list.add(rsRecipe);
