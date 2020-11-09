@@ -31,12 +31,12 @@ public class PersonDao {
 			insertStmt = connection.prepareStatement(insertPerson);
 		
 			insertStmt.setInt(1, person.getUserId());
-            insertStmt.setString(2, person.getUserName());
-            insertStmt.setString(3, person.getPassword());
-            insertStmt.setString(4, person.getFirstName());
-            insertStmt.setString(5, person.getLastName());
-            insertStmt.setString(6, person.getEmail());
-            insertStmt.setString(7, person.getPhone());
+		    	insertStmt.setString(2, person.getUserName());
+		    	insertStmt.setString(3, person.getPassword());
+			insertStmt.setString(4, person.getFirstName());
+			insertStmt.setString(5, person.getLastName());
+			insertStmt.setString(6, person.getEmail());
+			insertStmt.setString(7, person.getPhone());
 			
 			insertStmt.executeUpdate();
 			
