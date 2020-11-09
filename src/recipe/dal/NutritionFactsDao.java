@@ -2,22 +2,11 @@ package recipe.dal;
 
 import recipe.model.*;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
-import java.util.Date;
-
-import blog.dal.BlogPostsDao;
-import blog.dal.BlogUsersDao;
-import blog.model.BlogPosts;
-import blog.model.BlogUsers;
-import blog.model.Reshares;
-
-
 
 
 public class NutritionFactsDao {
@@ -92,7 +81,7 @@ public class NutritionFactsDao {
 	}
 	
 	// UPDATE
-	public NutritionFacts updateNutritionFact(NutritionFacts nutritionFact, double calories, int totalFat, int sodium, int protein, int saturatedFat, int carb, int recipeId) throws SQLException {
+	public NutritionFacts updateNutritionFact(NutritionFacts nutritionFact, double calories, int totalFat, int sugar, int sodium, int protein, int saturatedFat, int carb, int recipeId) throws SQLException {
 		String updateNutritionFact = "UPDATE NutritionFacts SET calories=?, totalFat=?, sugar=?, sodium=?, protein=?, saturatedFat=?, carb=?, recipeId=? WHERE nutritionFactsId=?;";
 		Connection connection = null;
 		PreparedStatement updateStmt = null;
@@ -101,16 +90,18 @@ public class NutritionFactsDao {
 			updateStmt = connection.prepareStatement(updateNutritionFact);
 			updateStmt.setDouble(1, calories);
 			updateStmt.setInt(2, totalFat);
-			updateStmt.setInt(3, sodium);
-			updateStmt.setInt(4, protein);
-			updateStmt.setInt(5, saturatedFat);
-			updateStmt.setInt(6, carb);
-			updateStmt.setInt(7, recipeId);
-			updateStmt.setInt(8, nutritionFact.getNutritionFactsId());
+			updateStmt.setInt(3, sugar);
+			updateStmt.setInt(4, sodium);
+			updateStmt.setInt(5, protein);
+			updateStmt.setInt(6, saturatedFat);
+			updateStmt.setInt(7, carb);
+			updateStmt.setInt(8, recipeId);
+			updateStmt.setInt(9, nutritionFact.getNutritionFactsId());
 			updateStmt.executeUpdate();
 
 			nutritionFact.setCalories(calories);
 			nutritionFact.setTotalFat(totalFat);
+			nutritionFact.setSugar(sugar);
 			nutritionFact.setSodium(sodium);
 			nutritionFact.setProtein(protein);
 			nutritionFact.setSaturatedFat(saturatedFat);
@@ -132,6 +123,98 @@ public class NutritionFactsDao {
 		}
 	}
 	
+	public NutritionFacts getNutritionFactById(int nutritionFactId) throws SQLException {
+		String selectNutrition =
+			"SELECT  NutritionFactId, Calories, Total_fat, Sugar, Sodium, Protein, Saturated_fat, Carb, RecipeId " +
+			"FROM NutritionFacts " +
+			"WHERE NutritionFactId=?;";
+		Connection connection = null;
+		PreparedStatement selectStmt = null;
+		ResultSet results = null;
+		try {
+			connection = connectionManager.getConnection();
+			selectStmt = connection.prepareStatement(selectNutrition);
+			selectStmt.setInt(1, nutritionFactId);
+			results = selectStmt.executeQuery();
+			
+			if(results.next()) {
+				int resultNutritionId = results.getInt("NutritionFactId");
+				double calories = results.getDouble("Calories");
+				int totalFat = results.getInt("Total_Fat");
+				int sugar = results.getInt("Sugar");
+				int sodium = results.getInt("Sodium");
+				int protein = results.getInt("Protein");
+				int saturatedFat = results.getInt("Saturated_fat");
+				int carb = results.getInt("Carb");			
+				int recipeId = results.getInt("RecipeId");
+				
+				
+				NutritionFacts rsNutritionFact = new NutritionFacts(resultNutritionId, calories, totalFat, sugar, sodium, protein, saturatedFat, carb, recipeId);
+
+				return rsNutritionFact;
+				}	
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw e;
+			}  finally {
+				if(connection != null) {
+					connection.close();
+				}
+				if(selectStmt != null) {
+					selectStmt.close();
+				}
+				if(results != null) {
+					results.close();
+				}
+			}
+		return null;
+	}
+	
+	public NutritionFacts getNutritionFactByRecipeId(int recipeId) throws SQLException {
+		String selectNutrition =
+			"SELECT  RecipeId, Calories, Total_fat, Sugar, Sodium, Protein, Saturated_fat, Carb, NutritionFactId " +
+			"FROM NutritionFacts " +
+			"WHERE RecipeId=?;";
+		Connection connection = null;
+		PreparedStatement selectStmt = null;
+		ResultSet results = null;
+		try {
+			connection = connectionManager.getConnection();
+			selectStmt = connection.prepareStatement(selectNutrition);
+			selectStmt.setInt(1, recipeId);
+			results = selectStmt.executeQuery();
+			
+			if(results.next()) {
+				int resultRecipeId = results.getInt("RecipeId");
+				double calories = results.getDouble("Calories");
+				int totalFat = results.getInt("Total_Fat");
+				int sugar = results.getInt("Sugar");
+				int sodium = results.getInt("Sodium");
+				int protein = results.getInt("Protein");
+				int saturatedFat = results.getInt("Saturated_fat");
+				int carb = results.getInt("Carb");
+				int nutritionFactId = results.getInt("NutritionFactId");
+				
+				NutritionFacts rsNutritionFact = new NutritionFacts(nutritionFactId, calories, totalFat, sugar, sodium, protein, saturatedFat, carb, resultRecipeId);
+
+				return rsNutritionFact;
+				}	
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw e;
+			}  finally {
+				if(connection != null) {
+					connection.close();
+				}
+				if(selectStmt != null) {
+					selectStmt.close();
+				}
+				if(results != null) {
+					results.close();
+				}
+			}
+		return null;
+	}
 	
 	// DELETE
 	public NutritionFacts delete(NutritionFacts nutritionFact) throws SQLException {
@@ -145,8 +228,10 @@ public class NutritionFactsDao {
 			deleteStmt = connection.prepareStatement(deleteNutritionFact);
 			deleteStmt.setInt(1, nutritionFact.getNutritionFactsId());
 			
-			deleteStmt.executeUpdate();
-			
+			int affectedRows = deleteStmt.executeUpdate();
+			if (affectedRows == 0) {
+				throw new SQLException("No records available to delete for NutritionFactId=" + nutritionFact.getNutritionFactsId());
+			}
 			return null;
 			
 		} catch (SQLException e) {
@@ -162,49 +247,6 @@ public class NutritionFactsDao {
 			}
 		}
 	}
-	
-	
-//	public NutritionFacts getCaloriesByRecipeId(int recipeId) throws SQLException {
-//		String selectReshare =
-//			"SELECT recipeId ,calories " +
-//			"FROM NutritionFacts " +
-//			"WHERE RecipeId=?;";
-//		Connection connection = null;
-//		PreparedStatement selectStmt = null;
-//		ResultSet results = null;
-//		try {
-//			connection = connectionManager.getConnection();
-//			selectStmt = connection.prepareStatement(selectReshare);
-//			selectStmt.setInt(1, recipeId);
-//			results = selectStmt.executeQuery();
-//			
-//			NutritionFactsDao nutritionFactsDao = NutritionFactsDao.getInstance();
-//			RecipesDao recipesDao = RecipesDao.getInstance();
-//			if(results.next()) {
-//				int resultReshareId = results.getInt("ReshareId");
-//				String userName = results.getString("UserName");
-//				int postId = results.getInt("PostId");
-//				
-//				BlogUsers blogUser = blogUsersDao.getBlogUserFromUserName(userName);
-//				BlogPosts blogPost = blogPostsDao.getBlogPostById(postId);
-//				Reshares reshare = new Reshares(resultReshareId, blogUser, blogPost);
-//				return reshare;
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			throw e;
-//		} finally {
-//			if(connection != null) {
-//				connection.close();
-//			}
-//			if(selectStmt != null) {
-//				selectStmt.close();
-//			}
-//			if(results != null) {
-//				results.close();
-//			}
-//		}
-//		return null;
-//	}
-
+				
 }
+

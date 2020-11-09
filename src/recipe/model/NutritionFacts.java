@@ -12,17 +12,21 @@ public class NutritionFacts {
 	protected int carb;
 	protected int recipeId;
 
-	public NutritionFacts(int nutritionFactsId, double calories, int totalFat, int sodium, int protein, int saturatedFat, int carb, int recipeId) {
+	public NutritionFacts(int nutritionFactsId, double calories, int totalFat, int sugar, int sodium, int protein, int saturatedFat, int carb, int recipeId) {
 		this.nutritionFactsId = nutritionFactsId;
 		this.calories = calories;
 		this.totalFat = totalFat;
+		this.sugar = sugar;
 		this.sodium = sodium;
 		this.protein = protein;
 		this.saturatedFat = saturatedFat;
 		this.carb = carb;
 		this.recipeId = recipeId;
 	}
-	
+
+
+
+
 	public int getNutritionFactsId() {
 		return nutritionFactsId;
 	}
