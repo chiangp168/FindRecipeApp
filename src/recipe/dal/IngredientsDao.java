@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import recipe.model.Ingredients;
 import recipe.model.Recipes;
-import review.dal.ConnectionManager;
+import recipe.dal.ConnectionManager;
 
 
 /**
@@ -101,7 +101,7 @@ public class IngredientsDao {
     try {
       connection = connectionManager.getConnection();
       selectStmt = connection.prepareStatement(selectIngredients);
-      selectStmt.setString(1, recipe.getRecipeId());
+      selectStmt.setInt(1, recipe.getRecipeId());
       results = selectStmt.executeQuery();
       while (results.next()) {
         Integer resultIngredientId = results.getInt("IngredientId");
@@ -136,7 +136,7 @@ public class IngredientsDao {
    * @return the ingredients
    * @throws SQLException the sql exception
    */
-  public Ingredients updateExpiration(Ingredients ingredient, String newIngredient) throws SQLException {
+  public Ingredients updateIngredient(Ingredients ingredient, String newIngredient) throws SQLException {
     String updateIngredient = "UPDATE Ingredients SET Ingredient=? WHERE IngredientId=?;";
     Connection connection = null;
     PreparedStatement updateStmt = null;
@@ -144,7 +144,7 @@ public class IngredientsDao {
       connection = connectionManager.getConnection();
       updateStmt = connection.prepareStatement(updateIngredient);
       updateStmt.setString(1, newIngredient);
-      updateStmt.setLong(2, ingredient.getIngredientId());
+      updateStmt.setInt(2, ingredient.getIngredientId());
       updateStmt.executeUpdate();
 
       ingredient.setIngredient(newIngredient);

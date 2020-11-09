@@ -33,6 +33,15 @@ public class Techniques {
   }
 
   /**
+   * Instantiates a new Techniques.
+   *
+   * @param techniqueId the technique id
+   */
+  public Techniques(Integer techniqueId) {
+    this.techniqueId = techniqueId;
+  }
+
+  /**
    * Gets technique id.
    *
    * @return the technique id

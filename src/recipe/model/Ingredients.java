@@ -33,6 +33,15 @@ public class Ingredients {
   }
 
   /**
+   * Instantiates a new Ingredients.
+   *
+   * @param ingredientId the ingredient id
+   */
+  public Ingredients(Integer ingredientId) {
+    this.ingredientId = ingredientId;
+  }
+
+  /**
    * Gets ingredient id.
    *
    * @return the ingredient id

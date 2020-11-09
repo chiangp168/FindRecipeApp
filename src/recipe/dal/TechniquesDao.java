@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import recipe.model.*
-import review.dal.ConnectionManager;
+import recipe.model.*;
+import recipe.dal.ConnectionManager;
 
 
 /**
@@ -99,7 +99,7 @@ public class TechniquesDao {
     try {
       connection = connectionManager.getConnection();
       selectStmt = connection.prepareStatement(selectTechniques);
-      selectStmt.setString(1, recipe.getRecipeId());
+      selectStmt.setInt(1, recipe.getRecipeId());
       results = selectStmt.executeQuery();
       while (results.next()) {
         Integer resultTechniqueId = results.getInt("TechniqueId");
@@ -134,7 +134,7 @@ public class TechniquesDao {
    * @return the techniques
    * @throws SQLException the sql exception
    */
-  public Techniques updateExpiration(Techniques technique, String newTechnique) throws SQLException {
+  public Techniques updateTechniqueDescription(Techniques technique, String newTechnique) throws SQLException {
     String updateTechnique = "UPDATE Techniques SET Description=? WHERE TechniqueId=?;";
     Connection connection = null;
     PreparedStatement updateStmt = null;
@@ -142,7 +142,7 @@ public class TechniquesDao {
       connection = connectionManager.getConnection();
       updateStmt = connection.prepareStatement(updateTechnique);
       updateStmt.setString(1, newTechnique);
-      updateStmt.setLong(2, technique.getTechniqueId());
+      updateStmt.setInt(2, technique.getTechniqueId());
       updateStmt.executeUpdate();
 
       technique.setDescription(newTechnique);
@@ -189,5 +189,4 @@ public class TechniquesDao {
       }
     }
   }
-
 }
