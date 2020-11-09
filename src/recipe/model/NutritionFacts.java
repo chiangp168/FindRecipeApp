@@ -2,17 +2,17 @@ package recipe.model;
 
 public class NutritionFacts {
 
-	protected Integer nutritionFactsId;
+	protected int nutritionFactsId;
 	protected double calories;
-	protected Integer totalFat;
-	protected Integer sugar;
-	protected Integer sodium;
-	protected Integer protein;
-	protected Integer saturatedFat;
-	protected Integer carb;
-	protected Integer recipeId;
+	protected int totalFat;
+	protected int sugar;
+	protected int sodium;
+	protected int protein;
+	protected int saturatedFat;
+	protected int carb;
+	protected int recipeId;
 
-	public NutritionFacts(Integer nutritionFactsId, double calories, Integer totalFat, Integer sodium, Integer protein, Integer saturatedFat, Integer carb, Integer recipeId) {
+	public NutritionFacts(int nutritionFactsId, double calories, int totalFat, int sodium, int protein, int saturatedFat, int carb, int recipeId) {
 		this.nutritionFactsId = nutritionFactsId;
 		this.calories = calories;
 		this.totalFat = totalFat;
@@ -23,11 +23,11 @@ public class NutritionFacts {
 		this.recipeId = recipeId;
 	}
 	
-	public Integer getNutritionFactsId() {
+	public int getNutritionFactsId() {
 		return nutritionFactsId;
 	}
 	
-	public void setNutritionFactsId(Integer nutritionFactsId) {
+	public void setNutritionFactsId(int nutritionFactsId) {
 		this.nutritionFactsId = nutritionFactsId;
 	}
 	
@@ -43,31 +43,31 @@ public class NutritionFacts {
 		return totalFat;
 	}
 
-	public void setTotalFat(Integer totalFat) {
+	public void setTotalFat(int totalFat) {
 		this.totalFat = totalFat;
 	}
 
-	public Integer getSugar() {
+	public int getSugar() {
 		return sugar;
 	}
 
-	public void setSugar(Integer sugar) {
+	public void setSugar(int sugar) {
 		this.sugar = sugar;
 	}
 
-	public Integer getSodium() {
+	public int getSodium() {
 		return sodium;
 	}
 
-	public void setSodium(Integer sodium) {
+	public void setSodium(int sodium) {
 		this.sodium = sodium;
 	}
 
-	public Integer getProtein() {
+	public int getProtein() {
 		return protein;
 	}
 
-	public void setProtein(Integer protein) {
+	public void setProtein(int protein) {
 		this.protein = protein;
 	}
 
@@ -75,23 +75,23 @@ public class NutritionFacts {
 		return saturatedFat;
 	}
 
-	public void setSaturatedFat(Integer saturatedFat) {
+	public void setSaturatedFat(int saturatedFat) {
 		this.saturatedFat = saturatedFat;
 	}
 
-	public Integer getCarb() {
+	public int getCarb() {
 		return carb;
 	}
 
-	public void setCarb(Integer carb) {
+	public void setCarb(int carb) {
 		this.carb = carb;
 	}
 
-	public Integer getRecipeId() {
+	public int getRecipeId() {
 		return recipeId;
 	}
 
-	public void setRecipeId(Integer recipeId) {
+	public void setRecipeId(int recipeId) {
 		this.recipeId = recipeId;
 	}
 	
