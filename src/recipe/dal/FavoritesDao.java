@@ -5,9 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import recipe.dal.ConnectionManager;
@@ -30,7 +28,7 @@ public class FavoritesDao {
 		return instance;
 	}
 	
-	
+	// create
 	public Favorites create(Favorites favorite) throws SQLException {
 		String insertFavorites =
 				"INSERT INTO Favorites(FavoriteId, UserId, RecipeId) " +
@@ -41,7 +39,7 @@ public class FavoritesDao {
 			try {
 				connection = connectionManager.getConnection();
 				
-				insertStmt = connection.prepareStatement(insertFavorites);
+				insertStmt = connection.prepareStatement(insertFavorites,
 					Statement.RETURN_GENERATED_KEYS);
 				
 				insertStmt.setInt(1, favorite.getFavoriteId());
@@ -77,6 +75,7 @@ public class FavoritesDao {
 			}
 	}
 	
+	//get by favoriteId
 	public Favorites getFavoriteById(int favoriteId)throws SQLException {
 		String selectFavorite =
 				"SELECT * " +
@@ -121,6 +120,7 @@ public class FavoritesDao {
 			return null;
 	}
 	
+	//get by userId
 	public List<Favorites> getFavoriteByUserId(int userId) throws SQLException{
 		List<Favorites> list = new ArrayList<Favorites>();
 		String selectFavorite=
@@ -164,6 +164,7 @@ public class FavoritesDao {
 			return list;
 	}
 	
+	//get by recipeId
 	public List<Favorites> getFavoriteByRecipeId(int recipeId) throws SQLException{
 		List<Favorites> list = new ArrayList<Favorites>();
 		String selectFavorite=
@@ -210,6 +211,7 @@ public class FavoritesDao {
 	
 	//I am not sure whether favorite has a "update" method
 	
+	//delete
 	public Favorites delete(Favorites favorite) throws SQLException {
 		String deleteFavorite = "DELETE FROM Favorites WHERE FavoriteId=?;";
 		Connection connection = null;

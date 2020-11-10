@@ -28,7 +28,7 @@ public class RatingsDao {
 		return instance;
 	}
 	
-	
+	//create
 	public Ratings create(Ratings rating) throws SQLException {
 		String insertRatings =
 				"INSERT INTO Ratings(RatingId, RatingPoints, UserId, RecipeId) " +
@@ -76,6 +76,7 @@ public class RatingsDao {
 			}
 	}
 	
+	//get by ratingId
 	public Ratings getRatingById(int ratingId)throws SQLException {
 		String selectRating =
 				"SELECT * " +
@@ -120,6 +121,7 @@ public class RatingsDao {
 			}
 			return null;
 	}
+	
 	
 	public List<Ratings> getRatingsByRatingPoints(int ratingPoints) throws SQLException{
 		List<Ratings> list = new ArrayList<Ratings>();
@@ -218,7 +220,7 @@ public class RatingsDao {
 		try {
 			connection = connectionManager.getConnection();
 			updateStmt = connection.prepareStatement(updateRating);
-			updateStmt.setInt(1, rating.getRatingPoints());
+			updateStmt.setInt(1, ratingPoints);
 			updateStmt.setInt(2, rating.getRatingId());
 			
 			updateStmt.executeUpdate();
