@@ -1,7 +1,7 @@
 package recipe.model;
 
-import recipe.model.Users;
-import recipe.model.Ratings;
+import recipe.model.Users;]
+import recipe.model.Recipes;
 
 public class Favorites {
 	protected int favoriteId;
@@ -13,6 +13,16 @@ public class Favorites {
 		this.user = user;
 		this.recipe = recipe;
 	}
+	
+	public Favorites(int favoriteId) {
+		this.favoriteId = favoriteId;
+	}
+	
+	public Favorites(Users user,Recipes recipe) {
+		this.user = user;
+		this.recipe = recipe;
+	}
+	
 	
 	public int getFavoriteId() {
 		return favoriteId;

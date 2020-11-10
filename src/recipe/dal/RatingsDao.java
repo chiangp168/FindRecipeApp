@@ -20,7 +20,7 @@ public class RatingsDao {
 	
 	public Ratings create(Ratings rating) throws SQLException {
 		String insertRatings =
-				"INSERT INTO Ratings(ratingId, ratingPoints, userId, recipeId) " +
+				"INSERT INTO Ratings(RatingId, RatingPoints, UserId, RecipeId) " +
 				"VALUES(?,?,?,?);";
 			Connection connection = null;
 			PreparedStatement insertStmt = null;
@@ -84,8 +84,8 @@ public class RatingsDao {
 					int ratingPoints = results.getInt("RatingPoints");
 					int userId = results.getInt("UserId");
 					int recipeId = results.getInt("RecipeId");
-					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao is done
-					Users rsuser = usersDao.getUserByUserId(rsuserId);//needs double check when UsersDao is done
+					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao and RecipeDao are done
+					Users rsuser = usersDao.getUserByUserId(rsuserId);//needs double check when UsersDao and recipedao are done
 					
 					RecipesDao recipesDao = RecipesIdDao.getInstance();
 					Recipes rsrecipe = recipesDao.getRecipeByRecipeId(rsrecipeId)
@@ -110,17 +110,17 @@ public class RatingsDao {
 			return null;
 	}
 	
-	public List<Ratings> getRatingsByRatingId(int RatingId) throws SQLException{
+	public List<Ratings> getRatingsByRatingPoints(int ratingPoints) throws SQLException{
 		List<Ratings> list = new ArrayList<Ratings>();
 		String selectRating =
-				"SELECT * FROM Ratings WHERE RatingId =?;";
+				"SELECT * FROM Ratings WHERE RatingPoints =?;";
 			Connection connection = null;
 			PreparedStatement selectStmt = null;
 			ResultSet results = null;
 			try {
 				connection = connectionManager.getConnection();
 				selectStmt = connection.prepareStatement(selectRating);
-				selectStmt.setInt(1, ratingId);
+				selectStmt.setInt(1, ratingPoints);
 				results = selectStmt.executeQuery();
 				
 				while(results.next()) {
@@ -128,8 +128,8 @@ public class RatingsDao {
 					int ratingPoints = results.getInt("RatingPoints");
 					int userId = results.getInt("UserId");
 					int recipeId = results.getInt("RecipeId");
-					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao is done
-					Users rsuser = usersDao.getUserByUserId(rsuserId);//needs double check when UsersDao is done
+					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao and recipedao are done
+					Users rsuser = usersDao.getUserByUserId(rsuserId);//needs double check when UsersDao and recipedao are done
 					
 					RecipesDao recipesDao = RecipesIdDao.getInstance();
 					Recipes rsrecipe = recipesDao.getRecipeByRecipeId(rsrecipeId)
@@ -154,7 +154,7 @@ public class RatingsDao {
 			return list;
 	}
 	
-	public List<Ratings> getRatingsByUserId(Int UserId) throws SQLException{
+	public List<Ratings> getRatingsByUserId(int userId) throws SQLException{
 		List<Ratings> list = new ArrayList<Ratings>();
 		String selectRecipe =
 				"SELECT * FROM Ratings WHERE userId =?;";
@@ -172,8 +172,8 @@ public class RatingsDao {
 					int ratingPoints = results.getInt("RatingPoints");
 					int userId = results.getInt("UserId");
 					int recipeId = results.getInt("RecipeId");
-					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao is done
-					Users rsuser = usersDao.getUserByUserId(rsuserId);//needs double check when UsersDao is done
+					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao and RecipeDao are done
+					Users rsuser = usersDao.getUserByUserId(rsuserId);//needs double check when UsersDao and RecipeDao are done
 					
 					RecipesDao recipesDao = RecipesIdDao.getInstance();
 					Recipes rsrecipe = recipesDao.getRecipeByRecipeId(rsrecipeId)
@@ -199,7 +199,7 @@ public class RatingsDao {
 	}
 	
 	
-	public Ratings updateByRatingPoints(Ratings rating, int RatingPoints) throws SQLException {
+	public Ratings updateByRatingPoints(Ratings rating, int ratingPoints) throws SQLException {
 		String updateRating = "UPDATE Ratings set RatingPoints=? where RatingId=?;";
 		Connection connection = null;
 		PreparedStatement updateStmt = null;

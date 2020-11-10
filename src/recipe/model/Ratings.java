@@ -16,6 +16,17 @@ public class Ratings {
 		this.recipe = recipe;
 		
 	}
+	
+	public Ratings(int ratingId) {
+		this.ratingId = ratingId;
+		
+	}
+	
+	public Ratings(int ratingPoints,Users user, Recipes recipe) {
+		this.ratingPoints = ratingPoints;
+		this.user = user;
+		this.recipe = recipe;
+		
 	public int getRatingId() {
 		return ratingId;
 	}
