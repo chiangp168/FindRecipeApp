@@ -1,8 +1,5 @@
 package recipe.model;
 
-import recipe.model.Users;
-import recipe.model.Recipes;
-
 public class Ratings {
 	protected int ratingId;
 	protected int ratingPoints;
@@ -26,6 +23,7 @@ public class Ratings {
 		this.ratingPoints = ratingPoints;
 		this.user = user;
 		this.recipe = recipe;
+	}
 		
 	public int getRatingId() {
 		return ratingId;
@@ -43,7 +41,7 @@ public class Ratings {
 		this.ratingPoints = ratingPoints;
 	}
 	
-	public User getUser() {
+	public Users getUser() {
 		return user;
 	}
 

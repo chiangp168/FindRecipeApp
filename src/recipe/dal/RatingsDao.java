@@ -1,6 +1,17 @@
 package recipe.dal;
-
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import recipe.dal.ConnectionManager;
+import recipe.model.Recipes;
+import recipe.model.Users;
+import recipe.model.Ratings;
+
 
 
 public class RatingsDao {
@@ -34,7 +45,7 @@ public class RatingsDao {
 				insertStmt.setInt(1, rating.getRatingId());
 				insertStmt.setInt(2, rating.getRatingPoints());
 				insertStmt.setInt(3, rating.getUser().getUserId());
-				insertStmt.setInt(4, recipe.getRecipe().getRecipeId());
+				insertStmt.setInt(4, rating.getRecipes().getRecipeId());
 				
 				insertStmt.executeUpdate();
 				
@@ -85,10 +96,10 @@ public class RatingsDao {
 					int userId = results.getInt("UserId");
 					int recipeId = results.getInt("RecipeId");
 					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao and RecipeDao are done
-					Users rsuser = usersDao.getUserByUserId(rsuserId);//needs double check when UsersDao and recipedao are done
+					Users rsuser = usersDao.getUserByUserId(userId);//needs double check when UsersDao and recipedao are done
 					
-					RecipesDao recipesDao = RecipesIdDao.getInstance();
-					Recipes rsrecipe = recipesDao.getRecipeByRecipeId(rsrecipeId)
+					RecipesDao recipesDao = RecipesDao.getInstance();
+					Recipes rsrecipe = recipesDao.getRecipeById(recipeId);
 					
 					Ratings rsRating = new Ratings(rsratingId, ratingPoints, rsuser,rsrecipe);
 					return rsRating;
@@ -125,17 +136,17 @@ public class RatingsDao {
 				
 				while(results.next()) {
 					int rsratingId = results.getInt("RatingId");
-					int ratingPoints = results.getInt("RatingPoints");
+					int rsratingPoints = results.getInt("RatingPoints");
 					int userId = results.getInt("UserId");
 					int recipeId = results.getInt("RecipeId");
 					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao and recipedao are done
-					Users rsuser = usersDao.getUserByUserId(rsuserId);//needs double check when UsersDao and recipedao are done
+					Users rsuser = usersDao.getUserByUserId(userId);//needs double check when UsersDao and recipedao are done
 					
-					RecipesDao recipesDao = RecipesIdDao.getInstance();
-					Recipes rsrecipe = recipesDao.getRecipeByRecipeId(rsrecipeId)
+					RecipesDao recipesDao = RecipesDao.getInstance();
+					Recipes rsrecipe = recipesDao.getRecipeById(recipeId);
 					
-					Ratings rsRating = new Ratings(rsratingId, ratingPoints, rsuser,rsrecipe);
-					list.add(rsRating)
+					Ratings rsRating = new Ratings(rsratingId, rsratingPoints, rsuser,rsrecipe);
+					list.add(rsRating);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -156,7 +167,7 @@ public class RatingsDao {
 	
 	public List<Ratings> getRatingsByUserId(int userId) throws SQLException{
 		List<Ratings> list = new ArrayList<Ratings>();
-		String selectRecipe =
+		String selectRating =
 				"SELECT * FROM Ratings WHERE userId =?;";
 			Connection connection = null;
 			PreparedStatement selectStmt = null;
@@ -164,19 +175,19 @@ public class RatingsDao {
 			try {
 				connection = connectionManager.getConnection();
 				selectStmt = connection.prepareStatement(selectRating);
-				selectStmt.setString(1, userId);
+				selectStmt.setLong(1, userId);
 				results = selectStmt.executeQuery();
 				
 				while(results.next()) {
 					int rsratingId = results.getInt("RatingId");
 					int ratingPoints = results.getInt("RatingPoints");
-					int userId = results.getInt("UserId");
+					int rsuserId = results.getInt("UserId");
 					int recipeId = results.getInt("RecipeId");
 					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao and RecipeDao are done
 					Users rsuser = usersDao.getUserByUserId(rsuserId);//needs double check when UsersDao and RecipeDao are done
 					
-					RecipesDao recipesDao = RecipesIdDao.getInstance();
-					Recipes rsrecipe = recipesDao.getRecipeByRecipeId(rsrecipeId)
+					RecipesDao recipesDao = RecipesDao.getInstance();
+					Recipes rsrecipe = recipesDao.getRecipeById(recipeId);
 					
 					Ratings rsRating = new Ratings(rsratingId, ratingPoints, rsuser,rsrecipe);
 					list.add(rsRating);
@@ -211,7 +222,7 @@ public class RatingsDao {
 			updateStmt.setInt(2, rating.getRatingId());
 			
 			updateStmt.executeUpdate();
-			rating.setRatingPoints(newRatingPoints);
+			rating.setRatingPoints(ratingPoints);
 			return rating;
 		} catch (SQLException e) {
 			e.printStackTrace();

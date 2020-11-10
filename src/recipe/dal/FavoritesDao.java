@@ -1,6 +1,19 @@
 package recipe.dal;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import recipe.dal.ConnectionManager;
+import recipe.model.Recipes;
+import recipe.model.Users;
+import recipe.model.Favorites;
 
 
 public class FavoritesDao {
@@ -28,12 +41,12 @@ public class FavoritesDao {
 			try {
 				connection = connectionManager.getConnection();
 				
-				insertStmt = connection.prepareStatement(insertRatings,
+				insertStmt = connection.prepareStatement(insertFavorites);
 					Statement.RETURN_GENERATED_KEYS);
 				
-				insertStmt.setInt(1, Favorites.getFavoriteId());
-				insertStmt.setInt(2, Favorites.getUser().getUserId());
-				insertStmt.setInt(3, Favorites.getRecipe().getRecipeId());
+				insertStmt.setInt(1, favorite.getFavoriteId());
+				insertStmt.setInt(2, favorite.getUser().getUserId());
+				insertStmt.setInt(3, favorite.getRecipe().getRecipeId());
 				
 				insertStmt.executeUpdate();
 				
@@ -83,12 +96,12 @@ public class FavoritesDao {
 					int userId = results.getInt("UserId");
 					int recipeId = results.getInt("RecipeId");
 					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao is done
-					Users rsuser = usersDao.getUserByUserId(rsuserId);//needs double check when UsersDao is done
+					Users rsuser = usersDao.getUserByUserId(userId);//needs double check when UsersDao is done
 					
-					RecipesDao recipesDao = RecipesIdDao.getInstance();
-					Recipes rsrecipe = recipesDao.getRecipeByRecipeId(rsrecipeId)
+					RecipesDao recipesDao = RecipesDao.getInstance();
+					Recipes rsrecipe = recipesDao.getRecipeById(recipeId);
 					
-					Favorites rsFavorite = new Favorites (rsfavoriteId rsuser,rsrecipe);
+					Favorites rsFavorite = new Favorites (rsfavoriteId,rsuser,rsrecipe);
 					return rsFavorite;
 				}
 			} catch (SQLException e) {
@@ -123,16 +136,16 @@ public class FavoritesDao {
 				
 				while(results.next()) {
 					int rsfavoriteId = results.getInt("FavoriteId");
-					int userId = results.getInt("UserId");
+					int rsuserId = results.getInt("UserId");
 					int recipeId = results.getInt("RecipeId");
 					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao is done
 					Users rsuser = usersDao.getUserByUserId(rsuserId);//needs double check when UsersDao is done
 					
-					RecipesDao recipesDao = RecipesIdDao.getInstance();
-					Recipes rsrecipe = recipesDao.getRecipeByRecipeId(rsrecipeId)
+					RecipesDao recipesDao = RecipesDao.getInstance();
+					Recipes rsrecipe = recipesDao.getRecipeById(recipeId);
 					
-					Favorites rsFavorite = new Favorites (rsfavoriteId rsuser,rsrecipe);
-					list.add(rsFavorite)
+					Favorites rsFavorite = new Favorites (rsfavoriteId, rsuser,rsrecipe);
+					list.add(rsFavorite);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -161,21 +174,21 @@ public class FavoritesDao {
 			try {
 				connection = connectionManager.getConnection();
 				selectStmt = connection.prepareStatement(selectFavorite);
-				selectStmt.setInt(1, userId);
+				selectStmt.setInt(1, recipeId);
 				results = selectStmt.executeQuery();
 				
 				while(results.next()) {
 					int rsfavoriteId = results.getInt("FavoriteId");
 					int userId = results.getInt("UserId");
-					int recipeId = results.getInt("RecipeId");
+					int rsrecipeId = results.getInt("RecipeId");
 					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao is done
-					Users rsuser = usersDao.getUserByUserId(rsuserId);//needs double check when UsersDao is done
+					Users rsuser = usersDao.getUserByUserId(userId);//needs double check when UsersDao is done
 					
-					RecipesDao recipesDao = RecipesIdDao.getInstance();
-					Recipes rsrecipe = recipesDao.getRecipeByRecipeId(rsrecipeId)
+					RecipesDao recipesDao = RecipesDao.getInstance();
+					Recipes rsrecipe = recipesDao.getRecipeById(rsrecipeId);
 					
-					Favorites rsFavorite = new Favorites (rsfavoriteId rsuser,rsrecipe);
-					list.add(rsFavorite)
+					Favorites rsFavorite = new Favorites (rsfavoriteId,rsuser,rsrecipe);
+					list.add(rsFavorite);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

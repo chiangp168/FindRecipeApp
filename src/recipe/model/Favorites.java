@@ -1,8 +1,5 @@
 package recipe.model;
 
-import recipe.model.Users;]
-import recipe.model.Recipes;
-
 public class Favorites {
 	protected int favoriteId;
 	protected Users user;
