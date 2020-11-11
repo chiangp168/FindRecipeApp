@@ -76,7 +76,7 @@ public class NutritionFacts {
 		this.protein = protein;
 	}
 
-	public Integer getSaturatedFat() {
+	public int getSaturatedFat() {
 		return saturatedFat;
 	}
 
