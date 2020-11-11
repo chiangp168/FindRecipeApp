@@ -60,7 +60,7 @@ public class UsersDao extends PersonDao{
 	}
 
 
-    public Users getUserByUserId(Integer userId) throws SQLException {
+    public Users getUsersByUserId(Integer userId) throws SQLException {
 		String selectUser =
 			"SELECT Users.UserId AS UserId, UserName, UserPassword, FirstName, LastName, Email, Phone " +
 			"FROM Users INNER JOIN Person " +
