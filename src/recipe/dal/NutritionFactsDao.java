@@ -8,9 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import blog.model.BlogPosts;
-
-
 public class NutritionFactsDao {
 	protected ConnectionManager connectionManager;
 
@@ -151,10 +148,9 @@ public class NutritionFactsDao {
 				int saturatedFat = results.getInt("Saturated_fat");
 				int carb = results.getInt("Carb");			
 				int recipeId = results.getInt("RecipeId");
-				Recipes recipe = RecipesDao.getRecipeById(recipeId);
+				Recipes recipe = RecipesDao.getInstance().getRecipeById(recipeId);
 				
 				
-//						BlogPosts blogPost = blogPostsDao.getBlogPostById(postId);
 				NutritionFacts rsNutritionFact = new NutritionFacts(resultNutritionId, calories, totalFat, sugar, sodium, protein, saturatedFat, carb, recipe);
 
 				return rsNutritionFact;
@@ -201,7 +197,7 @@ public class NutritionFactsDao {
 				int carb = results.getInt("Carb");
 				int nutritionFactId = results.getInt("NutritionFactId");
 				
-				Recipes recipe = RecipesDao.getRecipeById(resultRecipeId);
+				Recipes recipe = RecipesDao.getInstance().getRecipeById(resultRecipeId);
 				
 				NutritionFacts rsNutritionFact = new NutritionFacts(nutritionFactId, calories, totalFat, sugar, sodium, protein, saturatedFat, carb, recipe);
 
