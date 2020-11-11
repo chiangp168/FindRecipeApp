@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import blog.model.BlogPosts;
+
 
 public class NutritionFactsDao {
 	protected ConnectionManager connectionManager;
@@ -27,8 +29,8 @@ public class NutritionFactsDao {
 	// CREATE
 	public NutritionFacts create(NutritionFacts nutritionFact) throws SQLException {
 		String insertNutritionFact = 
-				"INSERT INTO NutritionFacts(Calories,Total_fat,Sugar, Sodium, Protein, Saturated_fat, Carb, RecipeId)"
-				+ " VALUES(?,?,?,?,?,?,?,?);";
+				"INSERT INTO NutritionFacts(Calories,Total_fat,Sugar, Sodium, Protein, Saturated_fat, "
+				+ "Carb, RecipeId) VALUES(?,?,?,?,?,?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		ResultSet resultKey = null;
@@ -46,7 +48,7 @@ public class NutritionFactsDao {
 			insertStmt.setInt(5, nutritionFact.getProtein());
 			insertStmt.setInt(6, nutritionFact.getSaturatedFat());
 			insertStmt.setInt(7, nutritionFact.getCarb());
-			insertStmt.setInt(8, nutritionFact.getRecipeId());
+			insertStmt.setInt(8, nutritionFact.getRecipe().getRecipeId());
 			
 			insertStmt.executeUpdate();
 			
@@ -81,8 +83,10 @@ public class NutritionFactsDao {
 	}
 	
 	// UPDATE
-	public NutritionFacts updateNutritionFact(NutritionFacts nutritionFact, double calories, int totalFat, int sugar, int sodium, int protein, int saturatedFat, int carb, int recipeId) throws SQLException {
-		String updateNutritionFact = "UPDATE NutritionFacts SET calories=?, totalFat=?, sugar=?, sodium=?, protein=?, saturatedFat=?, carb=?, recipeId=? WHERE nutritionFactsId=?;";
+	public NutritionFacts updateNutritionFact(NutritionFacts nutritionFact, double calories, int totalFat, 
+			int sugar, int sodium, int protein, int saturatedFat, int carb, Recipes recipe) throws SQLException {
+		String updateNutritionFact = "UPDATE NutritionFacts SET calories=?, totalFat=?, sugar=?, sodium=?,"
+				+ " protein=?, saturatedFat=?, carb=?, recipeId=? WHERE nutritionFactsId=?;";
 		Connection connection = null;
 		PreparedStatement updateStmt = null;
 		try {
@@ -95,7 +99,7 @@ public class NutritionFactsDao {
 			updateStmt.setInt(5, protein);
 			updateStmt.setInt(6, saturatedFat);
 			updateStmt.setInt(7, carb);
-			updateStmt.setInt(8, recipeId);
+			updateStmt.setInt(8, recipe.getRecipeId());
 			updateStmt.setInt(9, nutritionFact.getNutritionFactsId());
 			updateStmt.executeUpdate();
 
@@ -106,7 +110,7 @@ public class NutritionFactsDao {
 			nutritionFact.setProtein(protein);
 			nutritionFact.setSaturatedFat(saturatedFat);
 			nutritionFact.setCarb(carb);
-			nutritionFact.setRecipeId(recipeId);
+			nutritionFact.setRecipe(recipe);
 			
 			return nutritionFact;
 			
@@ -147,9 +151,11 @@ public class NutritionFactsDao {
 				int saturatedFat = results.getInt("Saturated_fat");
 				int carb = results.getInt("Carb");			
 				int recipeId = results.getInt("RecipeId");
+				Recipes recipe = RecipesDao.getRecipeById(recipeId);
 				
 				
-				NutritionFacts rsNutritionFact = new NutritionFacts(resultNutritionId, calories, totalFat, sugar, sodium, protein, saturatedFat, carb, recipeId);
+//						BlogPosts blogPost = blogPostsDao.getBlogPostById(postId);
+				NutritionFacts rsNutritionFact = new NutritionFacts(resultNutritionId, calories, totalFat, sugar, sodium, protein, saturatedFat, carb, recipe);
 
 				return rsNutritionFact;
 				}	
@@ -195,7 +201,9 @@ public class NutritionFactsDao {
 				int carb = results.getInt("Carb");
 				int nutritionFactId = results.getInt("NutritionFactId");
 				
-				NutritionFacts rsNutritionFact = new NutritionFacts(nutritionFactId, calories, totalFat, sugar, sodium, protein, saturatedFat, carb, resultRecipeId);
+				Recipes recipe = RecipesDao.getRecipeById(resultRecipeId);
+				
+				NutritionFacts rsNutritionFact = new NutritionFacts(nutritionFactId, calories, totalFat, sugar, sodium, protein, saturatedFat, carb, recipe);
 
 				return rsNutritionFact;
 				}	

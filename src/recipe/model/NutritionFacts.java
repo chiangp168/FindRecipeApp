@@ -10,9 +10,10 @@ public class NutritionFacts {
 	protected int protein;
 	protected int saturatedFat;
 	protected int carb;
-	protected int recipeId;
+	protected Recipes recipe;
 
-	public NutritionFacts(int nutritionFactsId, double calories, int totalFat, int sugar, int sodium, int protein, int saturatedFat, int carb, int recipeId) {
+	public NutritionFacts(int nutritionFactsId, double calories, int totalFat, int sugar, int sodium, 
+			int protein, int saturatedFat, int carb, Recipes recipe) {
 		this.nutritionFactsId = nutritionFactsId;
 		this.calories = calories;
 		this.totalFat = totalFat;
@@ -21,7 +22,7 @@ public class NutritionFacts {
 		this.protein = protein;
 		this.saturatedFat = saturatedFat;
 		this.carb = carb;
-		this.recipeId = recipeId;
+		this.recipe = recipe;
 	}
 
 
@@ -91,12 +92,12 @@ public class NutritionFacts {
 		this.carb = carb;
 	}
 
-	public int getRecipeId() {
-		return recipeId;
+	public Recipes getRecipe() {
+		return recipe;
 	}
 
-	public void setRecipeId(int recipeId) {
-		this.recipeId = recipeId;
+	public void setRecipe(Recipes recipe) {
+		this.recipe = recipe;
 	}
 	
 }
