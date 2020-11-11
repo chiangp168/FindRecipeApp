@@ -25,7 +25,7 @@ public class UsersDao extends PersonDao{
             users.getLastName(), users.getEmail(), users.getPhone()));
 
         String insertUser = 
-            "INSERT INTO Users(UserId,UserName,UserPassword,FirstName,LastName,Email,Phone) VALUES(?,?,?,?,?,?,?);";
+            "INSERT INTO Users(UserId) VALUES(?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		try {
@@ -33,12 +33,6 @@ public class UsersDao extends PersonDao{
             insertStmt = connection.prepareStatement(insertUser);
             
             insertStmt.setInt(1, users.getUserId());
-            insertStmt.setString(2, users.getUserName());
-            insertStmt.setString(3, users.getPassword());
-            insertStmt.setString(4, users.getFirstName());
-            insertStmt.setString(5, users.getLastName());
-            insertStmt.setString(6, users.getEmail());
-            insertStmt.setString(7, users.getPhone());
 
 			insertStmt.executeUpdate();
 			return users;

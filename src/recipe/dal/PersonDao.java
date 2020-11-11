@@ -68,7 +68,7 @@ public class PersonDao {
 			results = selectStmt.executeQuery();
 			
 			if(results.next()) {
-				Integer resultUserId = results.getInt("UserId");
+				int resultUserId = results.getInt("UserId");
 				String userName = results.getString("UserName");
 				String userPassword = results.getString("UserPassword");
 				String firstName = results.getString("FirstName");
