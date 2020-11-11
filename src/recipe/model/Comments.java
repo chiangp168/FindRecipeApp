@@ -18,6 +18,17 @@ public class Comments {
     this.createdTime = createdTime;
   }
 
+  public Comments(Integer commentId) {
+    this.commentId = commentId;
+  }
+
+  public Comments(Integer userId, Integer recipeId, String content, LocalDateTime createdTime) {
+    this.userId = userId;
+    this.recipeId = recipeId;
+    this.content = content;
+    this.createdTime = createdTime;
+  }
+
   public Integer getCommentId() {
     return commentId;
   }

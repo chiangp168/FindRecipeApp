@@ -13,19 +13,19 @@ import recipe.model.Comments;
 public class CommentsDao {
   private ConnectionManager connectionManager;
   private static CommentsDao instance = null;
-  CommentsDao() {
+  protected CommentsDao() {
     connectionManager = new ConnectionManager();
   }
 
   public static CommentsDao getInstance() {
-    if( instance == null) {
+    if (instance == null) {
       instance = new CommentsDao();
     }
     return instance;
   }
 
   public Comments create(Comments comment) throws SQLException {
-    String insertComment = "INSERT INTO (UserId,RecipeId,ShortComment,Created) VALUES(?,?,?,?);";
+    String insertComment = "INSERT INTO Comments (UserId,RecipeId,ShortComment,Created) VALUES(?,?,?,?);";
     Connection connection = null;
     PreparedStatement insertStmt = null;
     ResultSet resultKey = null;
@@ -199,14 +199,14 @@ public class CommentsDao {
     }
   }
 
-  public Comments deleteById(int commentId) throws SQLException {
+  public Comments deleteById(Comments comments) throws SQLException {
     String deleteComment = "DELETE FROM Comments WHERE CommentId=?;";
     Connection connection = null;
     PreparedStatement deleteStmt = null;
     try {
       connection = connectionManager.getConnection();
       deleteStmt = connection.prepareStatement(deleteComment);
-      deleteStmt.setInt(1, commentId);
+      deleteStmt.setInt(1, comments.getCommentId());
       deleteStmt.executeUpdate();
       return null;
     } catch (SQLException e) {
