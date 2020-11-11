@@ -25,7 +25,7 @@ public class UsersDao extends PersonDao{
             users.getLastName(), users.getEmail(), users.getPhone()));
 
         String insertUser = 
-            "INSERT INTO Users(UserId,UserName,UserPassword,FirstName,LastName,Email,Phone) VALUES(?,?,?,?,?,?,?);";
+            "INSERT INTO Users(UserId) VALUES(?,?,?,?,?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		try {
