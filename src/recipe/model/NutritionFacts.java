@@ -2,6 +2,7 @@ package recipe.model;
 
 public class NutritionFacts {
 
+	protected int nutritionFactsId;
 	protected double calories;
 	protected int totalFat;
 	protected int sugar;
@@ -9,16 +10,30 @@ public class NutritionFacts {
 	protected int protein;
 	protected int saturatedFat;
 	protected int carb;
-	protected int recipeId;
+	protected Recipes recipe;
 
-	public NutritionFacts(double calories, int totalFat, int sodium, int protein, int saturatedFat, int carb, int recipeId) {
+	public NutritionFacts(int nutritionFactsId, double calories, int totalFat, int sugar, int sodium, 
+			int protein, int saturatedFat, int carb, Recipes recipe) {
+		this.nutritionFactsId = nutritionFactsId;
 		this.calories = calories;
 		this.totalFat = totalFat;
+		this.sugar = sugar;
 		this.sodium = sodium;
 		this.protein = protein;
 		this.saturatedFat = saturatedFat;
 		this.carb = carb;
-		this.recipeId = recipeId;
+		this.recipe = recipe;
+	}
+
+
+
+
+	public int getNutritionFactsId() {
+		return nutritionFactsId;
+	}
+	
+	public void setNutritionFactsId(int nutritionFactsId) {
+		this.nutritionFactsId = nutritionFactsId;
 	}
 	
 	public double getCalories() {
@@ -77,12 +92,12 @@ public class NutritionFacts {
 		this.carb = carb;
 	}
 
-	public int getRecipeId() {
-		return recipeId;
+	public Recipes getRecipe() {
+		return recipe;
 	}
 
-	public void setRecipeId(int recipeId) {
-		this.recipeId = recipeId;
+	public void setRecipe(Recipes recipe) {
+		this.recipe = recipe;
 	}
 	
 }
