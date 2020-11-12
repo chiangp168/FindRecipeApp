@@ -96,9 +96,8 @@ public class RatingsDao {
 					int ratingPoints = results.getInt("RatingPoints");
 					int userId = results.getInt("UserId");
 					int recipeId = results.getInt("RecipeId");
-					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao and RecipeDao are done
-					Users rsuser = usersDao.getUserByUserId(userId);//needs double check when UsersDao and recipedao are done
-					
+					UsersDao usersDao = UsersDao.getInstance();
+					Users rsuser = usersDao.getUserByUserId(userId);
 					RecipesDao recipesDao = RecipesDao.getInstance();
 					Recipes rsrecipe = recipesDao.getRecipeById(recipeId);
 					
@@ -141,8 +140,8 @@ public class RatingsDao {
 					int rsratingPoints = results.getInt("RatingPoints");
 					int userId = results.getInt("UserId");
 					int recipeId = results.getInt("RecipeId");
-					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao and recipedao are done
-					Users rsuser = usersDao.getUserByUserId(userId);//needs double check when UsersDao and recipedao are done
+					UsersDao usersDao = UsersDao.getInstance();
+					Users rsuser = usersDao.getUserByUserId(userId);
 					
 					RecipesDao recipesDao = RecipesDao.getInstance();
 					Recipes rsrecipe = recipesDao.getRecipeById(recipeId);
@@ -185,8 +184,8 @@ public class RatingsDao {
 					int ratingPoints = results.getInt("RatingPoints");
 					int rsuserId = results.getInt("UserId");
 					int recipeId = results.getInt("RecipeId");
-					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao and RecipeDao are done
-					Users rsuser = usersDao.getUserByUserId(rsuserId);//needs double check when UsersDao and RecipeDao are done
+					UsersDao usersDao = UsersDao.getInstance();
+					Users rsuser = usersDao.getUserByUserId(rsuserId);
 					
 					RecipesDao recipesDao = RecipesDao.getInstance();
 					Recipes rsrecipe = recipesDao.getRecipeById(recipeId);

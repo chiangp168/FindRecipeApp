@@ -94,8 +94,8 @@ public class FavoritesDao {
 					int rsfavoriteId = results.getInt("FavoriteId");
 					int userId = results.getInt("UserId");
 					int recipeId = results.getInt("RecipeId");
-					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao is done
-					Users rsuser = usersDao.getUserByUserId(userId);//needs double check when UsersDao is done
+					UsersDao usersDao = UsersDao.getInstance();
+					Users rsuser = usersDao.getUserByUserId(userId);
 					
 					RecipesDao recipesDao = RecipesDao.getInstance();
 					Recipes rsrecipe = recipesDao.getRecipeById(recipeId);
@@ -138,8 +138,8 @@ public class FavoritesDao {
 					int rsfavoriteId = results.getInt("FavoriteId");
 					int rsuserId = results.getInt("UserId");
 					int recipeId = results.getInt("RecipeId");
-					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao is done
-					Users rsuser = usersDao.getUserByUserId(rsuserId);//needs double check when UsersDao is done
+					UsersDao usersDao = UsersDao.getInstance();
+					Users rsuser = usersDao.getUserByUserId(rsuserId);
 					
 					RecipesDao recipesDao = RecipesDao.getInstance();
 					Recipes rsrecipe = recipesDao.getRecipeById(recipeId);
@@ -182,8 +182,8 @@ public class FavoritesDao {
 					int rsfavoriteId = results.getInt("FavoriteId");
 					int userId = results.getInt("UserId");
 					int rsrecipeId = results.getInt("RecipeId");
-					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao is done
-					Users rsuser = usersDao.getUserByUserId(userId);//needs double check when UsersDao is done
+					UsersDao usersDao = UsersDao.getInstance();
+					Users rsuser = usersDao.getUserByUserId(userId);
 					
 					RecipesDao recipesDao = RecipesDao.getInstance();
 					Recipes rsrecipe = recipesDao.getRecipeById(rsrecipeId);
@@ -208,8 +208,6 @@ public class FavoritesDao {
 			return list;
 	}
 	
-	
-	//I am not sure whether favorite has a "update" method
 	
 	//delete
 	public Favorites delete(Favorites favorite) throws SQLException {

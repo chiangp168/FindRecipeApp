@@ -99,7 +99,7 @@ public class RecipesDao {
 					
 					int userId = results.getInt("UserId");
 					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao is done
-					Users rsuser = usersDao.getUsersByUserId(userId);//needs double check when UsersDao is done
+					Users rsuser = usersDao.getUserByUserId(userId);//needs double check when UsersDao is done
 					
 					Recipes rsRecipe = new Recipes(rsrecipeId, recipeName, rsuser, timeToCook, numOfStep);
 					return rsRecipe;
@@ -142,7 +142,7 @@ public class RecipesDao {
 					
 					int userId = results.getInt("UserId");
 					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao is done
-					Users rsuser = usersDao.getUsersByUserId(userId);//needs double check when UsersDao is done
+					Users rsuser = usersDao.getUserByUserId(userId);//needs double check when UsersDao is done
 					
 					Recipes rsRecipe = new Recipes(rsrecipeId, rsrecipeName, rsuser, timeToCook, numOfStep);
 					list.add(rsRecipe);
@@ -185,7 +185,7 @@ public class RecipesDao {
 					
 					int rsuserId = results.getInt("UserId");
 					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao is done
-					Users rsuser = usersDao.getUsersByUserId(rsuserId);//needs double check when UsersDao is done
+					Users rsuser = usersDao.getUserByUserId(rsuserId);//needs double check when UsersDao is done
 					
 					Recipes rsRecipe = new Recipes(rsrecipeId, rsrecipeName, rsuser, timeToCook, numOfStep);
 					list.add(rsRecipe);
@@ -233,7 +233,7 @@ public class RecipesDao {
 					
 					int rsuserId = results.getInt("UserId");
 					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao is done
-					Users rsuser = usersDao.getUsersByUserId(rsuserId);//needs double check when UsersDao is done
+					Users rsuser = usersDao.getUserByUserId(rsuserId);//needs double check when UsersDao is done
 					
 					Recipes rsRecipe = new Recipes(rsrecipeId, rsrecipeName, rsuser, timeToCook, numOfStep);
 					list.add(rsRecipe);
