@@ -5,10 +5,6 @@ import recipe.model.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,11 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/recipecreate")
 public class RecipeCreate extends HttpServlet {
 	
-	protected RecipeDao recipeDao;
+	protected RecipesDao recipesDao;
 	
 	@Override
 	public void init() throws ServletException {
-		recipeDao = RecipeDao.getInstance();
+		recipesDao = RecipesDao.getInstance();
 	}
 	
 	@Override
@@ -52,16 +48,15 @@ public class RecipeCreate extends HttpServlet {
             messages.put("success", "Invalid recipeName");
         } else {
         	// Create the recipe
-        	
+        	String recipename = req.getParameter("recipename");
+        	int userid = Integer.parseInt(req.getParameter("userid"));
+        	int timetocook = Integer.parseInt(req.getParameter("timetocook"));
+        	int numberofsteps = Integer.parseInt(req.getParameter("numberofsteps"));
         	try {
-        		
-        	} catch (ParseException e) {
-        		e.printStackTrace();
-				throw new IOException(e);
-        	}
-	        try {
-	        
-	        } catch (SQLException e) {
+        		Recipes r = new Recipes(recipename, new Users(userid), timetocook, numberofsteps);
+	        	r = recipesDao.create(r);
+	        	messages.put("success", "Successfully created " + recipename);
+        	} catch (SQLException e) {
 				e.printStackTrace();
 				throw new IOException(e);
 	        }
