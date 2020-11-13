@@ -14,8 +14,20 @@
 	<h1>Create Recipe</h1>
 	<form action="recipecreate" method="post">
 		<p>
-			<label for="recipeName">recipeName</label>
-			<input id="recipeName" name="recipeName" value="">
+			<label for="recipename">RecipeName</label>
+			<input id="recipename" name="recipename" value="">
+		</p>
+		<p>
+			<label for="userid">UserId</label>
+			<input id="userid" name="userid" value="">
+		</p>
+		<p>
+			<label for="timetocook">TimeToCook</label>
+			<input id="timetocook" name="timetocook" value="">
+		</p>
+		<p>
+			<label for="numberofsteps">NumberOfSteps</label>
+			<input id="numberofsteps" name="numberofsteps" value="">
 		</p>
 		<p>
 			<input type="submit">
