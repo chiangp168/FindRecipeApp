@@ -95,7 +95,7 @@ public class FavoritesDao {
 					int userId = results.getInt("UserId");
 					int recipeId = results.getInt("RecipeId");
 					UsersDao usersDao = UsersDao.getInstance();
-					Users rsuser = usersDao.getUserByUserId(userId);
+					Users rsuser = usersDao.getUsersByUserId(userId);
 					
 					RecipesDao recipesDao = RecipesDao.getInstance();
 					Recipes rsrecipe = recipesDao.getRecipeById(recipeId);
@@ -124,7 +124,7 @@ public class FavoritesDao {
 	public List<Favorites> getFavoriteByUserId(int userId) throws SQLException{
 		List<Favorites> list = new ArrayList<Favorites>();
 		String selectFavorite=
-				"SELECT * FROM Ratings WHERE UserId =?;";
+				"SELECT * FROM Favorites WHERE UserId =?;";
 			Connection connection = null;
 			PreparedStatement selectStmt = null;
 			ResultSet results = null;
@@ -139,7 +139,7 @@ public class FavoritesDao {
 					int rsuserId = results.getInt("UserId");
 					int recipeId = results.getInt("RecipeId");
 					UsersDao usersDao = UsersDao.getInstance();
-					Users rsuser = usersDao.getUserByUserId(rsuserId);
+					Users rsuser = usersDao.getUsersByUserId(rsuserId);
 					
 					RecipesDao recipesDao = RecipesDao.getInstance();
 					Recipes rsrecipe = recipesDao.getRecipeById(recipeId);
@@ -168,7 +168,7 @@ public class FavoritesDao {
 	public List<Favorites> getFavoriteByRecipeId(int recipeId) throws SQLException{
 		List<Favorites> list = new ArrayList<Favorites>();
 		String selectFavorite=
-				"SELECT * FROM Ratings WHERE RecipeId =?;";
+				"SELECT * FROM Favorites WHERE RecipeId =?;";
 			Connection connection = null;
 			PreparedStatement selectStmt = null;
 			ResultSet results = null;
@@ -183,7 +183,7 @@ public class FavoritesDao {
 					int userId = results.getInt("UserId");
 					int rsrecipeId = results.getInt("RecipeId");
 					UsersDao usersDao = UsersDao.getInstance();
-					Users rsuser = usersDao.getUserByUserId(userId);
+					Users rsuser = usersDao.getUsersByUserId(userId);
 					
 					RecipesDao recipesDao = RecipesDao.getInstance();
 					Recipes rsrecipe = recipesDao.getRecipeById(rsrecipeId);
