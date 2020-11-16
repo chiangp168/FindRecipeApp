@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/personcreate")
-public class PersonCreate extends HttpServlet {
+@WebServlet("/persondelete")
+public class PersonDelete extends HttpServlet {
 	protected PersonDao personDao;
 	
 	@Override
@@ -28,9 +28,10 @@ public class PersonCreate extends HttpServlet {
 			throws ServletException, IOException {
 		// Map for storing messages.
         Map<String, String> messages = new HashMap<String, String>();
-		req.setAttribute("messages", messages);
+        req.setAttribute("messages", messages);
+        messages.put("title", "Delete Person");
 		//Just render the JSP.   
-        req.getRequestDispatcher("/PersonCreate.jsp").forward(req, resp);
+        req.getRequestDispatcher("/PersonDelete.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -43,25 +44,27 @@ public class PersonCreate extends HttpServlet {
         // Retrieve and validate name.
         String userId = req.getParameter("userId");
         if (userId == null || userId.trim().isEmpty()) {
-            messages.put("success", "Invalid userId");
+            messages.put("title", "Invalid UserId");
+            messages.put("disableSubmit", "true");
         } else {
-			// Create the recipe
-			String userName = req.getParameter("username");
-			String userPassword = req.getParameter("userpassword");
-			String firstName = req.getParameter("firstname");
-			String lastName = req.getParameter("lastname");
-			String email = req.getParameter("email");
-			String phone = req.getParameter("phone");
-        	
-        	try {
-        		Person person = new Person(Integer.parseInt(userId), userName, userPassword, firstName, lastName, email, phone);
-	        	person = personDao.create(person);
-	        	messages.put("success", "Successfully created " + userId);
-        	} catch (SQLException e) {
+            // Delete the BlogUser.
+            Person person = new Person(Integer.parseInt(userId));
+	        try {
+	        	person = personDao.delete(person);
+	        	// Update the message.
+		        if (person == null) {
+		            messages.put("title", "Successfully deleted " + userId);
+		            messages.put("disableSubmit", "true");
+		        } else {
+		        	messages.put("title", "Failed to delete " + userId);
+		        	messages.put("disableSubmit", "false");
+		        }
+	        } catch (SQLException e) {
 				e.printStackTrace();
 				throw new IOException(e);
 	        }
         }
-        req.getRequestDispatcher("/PersonCreate.jsp").forward(req, resp);
+        
+        req.getRequestDispatcher("/PersonDelete.jsp").forward(req, resp);
     }
 }
