@@ -41,14 +41,14 @@ public class PersonDao {
 			
 			insertStmt.executeUpdate();
 			
-			resultKey = insertStmt.getGeneratedKeys();
-			int personId = -1;
-			if(resultKey.next()) {
-				personId = resultKey.getInt(1);
-			} else {
-				throw new SQLException("Unable to retrieve auto-generated key.");
-			}
-			person.setUserId(personId);
+			//resultKey = insertStmt.getGeneratedKeys();
+			//int personId = -1;
+			//if(resultKey.next()) {
+			//	personId = resultKey.getInt(1);
+			//} else {
+			//	throw new SQLException("Unable to retrieve auto-generated key.");
+			//}
+			//person.setUserId(personId);
 			return person;
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -12,7 +12,7 @@
 </head>
 <body>
 	<h1>Update Person</h1>
-	<form action="userupdate" method="post">
+	<form action="personupdate" method="post">
 		<p>
 			<label for="userId">UserId</label>
 			<input id="userId" name="userId" value="${fn:escapeXml(param.userId)}">

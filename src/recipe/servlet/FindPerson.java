@@ -79,7 +79,7 @@ public class FindPerson extends HttpServlet {
             }
         	messages.put("success", "Displaying results for Person with UserId " + userId);
         }
-        req.getRequestDispatcher("/FindUsers.jsp").forward(req, resp);
+        req.getRequestDispatcher("/FindPerson.jsp").forward(req, resp);
     }
 }
 
