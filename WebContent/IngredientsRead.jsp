@@ -14,7 +14,7 @@
 	<form action="ingredientsread" method="post">
 		<h1>Search for ingredient by Recipe Id</h1>
 		<p>
-			<label for="recipeId">FirstName</label>
+			<label for="recipeId">Recipe Id</label>
 			<input id="recipeId" name="recipeId" value="${fn:escapeXml(param.recipeId)}">
 		</p>
 		<p>
@@ -36,10 +36,10 @@
             <c:forEach items="${ingredients}" var="ingredient" >
                 <tr>
                     <td><c:out value="${ingredient.getIngredientId()}" /></td>
-                    <td><c:out value="${ingredient.getRecipe().getRecipeId}" /></td>
+                    <td><c:out value="${ingredient.getRecipe().getRecipeId()}" /></td>
                     <td><c:out value="${ingredient.getIngredient()}" /></td>
-                    <td><a href="ingredientsdelete?ingredientid=<c:out value="${ingredient.getIngredientId()}"/>">Delete</a></td>
-                    <td><a href="ingredidentsupdate?ingredientid=<c:out value="${ingredient.getIngredientId()}"/>">Update</a></td>
+                    <td><a href="ingredientsdelete?ingredientId=<c:out value="${ingredient.getIngredientId()}"/>">Delete</a></td>
+                    <td><a href="ingredientsupdate?ingredientId=<c:out value="${ingredient.getIngredientId()}"/>">Update</a></td>
                 </tr>
             </c:forEach>
        </table>

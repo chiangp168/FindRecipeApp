@@ -8,10 +8,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Create a Ingredient</title>
+<title>Create a Technique</title>
 </head>
 <body>
-	<h1>Create ingredient</h1>
+	<h1>Create technique</h1>
 	<form action="techniquescreate" method="post">
 		<p>
 			<label for="recipeId">Recipe Id</label>

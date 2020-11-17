@@ -18,7 +18,7 @@
 			<input id="ingredientId" name="ingredientId" value="${fn:escapeXml(param.ingredientId)}">
 		</p>
 		<p>
-			<label for="ingredient">New Ingrediet</label>
+			<label for="ingredient">New Ingredient</label>
 			<input id="ingredient" name="ingredient" value="">
 		</p>
 		<p>

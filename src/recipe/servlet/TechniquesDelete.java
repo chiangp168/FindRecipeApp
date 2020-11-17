@@ -32,14 +32,14 @@ public class TechniquesDelete extends HttpServlet {
     req.setAttribute("messages", messages);
     // Provide a title and render the JSP.
     messages.put("title", "Delete Technique");
-    req.getRequestDispatcher("/TechniqueDelete.jsp").forward(req, resp);
+    req.getRequestDispatcher("/TechniquesDelete.jsp").forward(req, resp);
   }
 
 
   @Override
   public void doPost(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-
+	Map<String, String> messages = new HashMap<String, String>();
     Integer techniqueId = Integer.valueOf(req.getParameter("techniqueId"));
     if (techniqueId == null) {
       messages.put("title", "Invalid Technique Id");
@@ -61,6 +61,7 @@ public class TechniquesDelete extends HttpServlet {
         throw new IOException(e);
       }
     }
-    req.getRequestDispatcher("/TechniqueDelete.jsp").forward(req, resp);
+    req.setAttribute("messages", messages);
+    req.getRequestDispatcher("/TechniquesDelete.jsp").forward(req, resp);
   }
 }

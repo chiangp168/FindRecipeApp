@@ -9,8 +9,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import recipe.model.Ingredients;
-import recipe.model.Recipes;
 import recipe.dal.ConnectionManager;
+import recipe.model.Recipes;
+import recipe.model.Users;
 
 
 /**
@@ -46,12 +47,11 @@ public class IngredientsDao {
   /**
    * Create ingredients.
    *
-   * @param recipe     the recipe
    * @param ingredient the ingredient
    * @return the ingredients
    * @throws SQLException the sql exception
    */
-  public Ingredients create(Recipes recipe, Ingredients ingredient) throws SQLException {
+  public Ingredients create(Ingredients ingredient) throws SQLException {
     String insertIngredient = "INSERT INTO Ingredients(RecipeId, Ingredient) VALUES(?,?);";
     Connection connection = null;
     PreparedStatement insertStmt = null;
@@ -60,8 +60,9 @@ public class IngredientsDao {
       connection = connectionManager.getConnection();
       insertStmt = connection
           .prepareStatement(insertIngredient, Statement.RETURN_GENERATED_KEYS);
-      insertStmt.setInt(1, recipe.getRecipeId());
+      insertStmt.setInt(1, ingredient.getRecipe().getRecipeId());
       insertStmt.setString(2, ingredient.getIngredient());
+      insertStmt.executeUpdate();
       resultKey = insertStmt.getGeneratedKeys();
       int ingredientId = -1;
       if (resultKey.next()) {
@@ -82,6 +83,49 @@ public class IngredientsDao {
         insertStmt.close();
       }
     }
+  }
+
+  /**
+   * Gets ingredients by id.
+   *
+   * @param ingredientId the ingredient id
+   * @return the ingredients by id
+   * @throws SQLException the sql exception
+   */
+  public Ingredients getIngredientsById(Integer ingredientId) throws SQLException {
+    String selectIngredients =
+        "SELECT IngredientId,RecipeId, Ingredient FROM Ingredients WHERE IngredientId=?;";
+    Connection connection = null;
+    PreparedStatement selectStmt = null;
+    ResultSet results = null;
+    try {
+      connection = connectionManager.getConnection();
+      selectStmt = connection.prepareStatement(selectIngredients);
+      selectStmt.setInt(1, ingredientId);
+      results = selectStmt.executeQuery();
+      if (results.next()) {
+        Integer resultIngredientId = results.getInt("IngredientId");
+        Integer resultRecipeId = results.getInt("RecipeId");
+        Recipes newRecipe = new Recipes(resultRecipeId);
+        String resultIngredient = results.getString("Ingredient");
+        Ingredients rsIngredient = new Ingredients(resultIngredientId, newRecipe, resultIngredient);
+        return rsIngredient;
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      throw e;
+    } finally {
+      if (connection != null) {
+        connection.close();
+      }
+      if (selectStmt != null) {
+        selectStmt.close();
+      }
+      if (results != null) {
+        results.close();
+      }
+    }
+    return null;
   }
 
   /**

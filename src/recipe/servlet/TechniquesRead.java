@@ -64,6 +64,7 @@ public class TechniquesRead extends HttpServlet {
           e.printStackTrace();
           throw new IOException(e);
         }
+      req.setAttribute("messages", messages);
       req.setAttribute("techniques", foundTechnique);
       req.getRequestDispatcher("/TechniquesRead.jsp").forward(req, resp);
       }

@@ -84,6 +84,7 @@ public class IngredientsUpdate extends HttpServlet {
         e.printStackTrace();
         throw new IOException(e);
       }
+      req.setAttribute("messages", messages);
       req.getRequestDispatcher("/IngredientsUpdate.jsp").forward(req, resp);
     }
   }

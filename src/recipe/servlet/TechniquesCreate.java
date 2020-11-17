@@ -57,7 +57,7 @@ public class TechniquesCreate extends HttpServlet {
         } else{
           Techniques newTechnique = new Techniques(recipe,technique);
           newTechnique = techniquesDao.create(newTechnique);
-          messages.put("success", "Successfully created " + recipe.getRecipeName() + " with technique" + newTechnique.getTechnique());
+          messages.put("success", "Successfully created " + recipe.getRecipeName() + " with technique" + newTechnique.getDescription());
         }
       } catch (SQLException e) {
         e.printStackTrace();

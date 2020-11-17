@@ -33,14 +33,14 @@ public class IngredientsDelete extends HttpServlet {
     req.setAttribute("messages", messages);
     // Provide a title and render the JSP.
     messages.put("title", "Delete Ingredient");
-    req.getRequestDispatcher("/IngredientDelete.jsp").forward(req, resp);
+    req.getRequestDispatcher("/IngredientsDelete.jsp").forward(req, resp);
   }
 
 
   @Override
   public void doPost(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-
+	Map<String, String> messages = new HashMap<String, String>();
     Integer ingredientId = Integer.valueOf(req.getParameter("ingredientId"));
     if (ingredientId == null) {
       messages.put("title", "Invalid Ingredient Id");
@@ -51,10 +51,10 @@ public class IngredientsDelete extends HttpServlet {
         toDelete = ingredientsDao.delete(toDelete);
         // Update the message.
         if (toDelete == null) {
-          messages.put("title", "Successfully deleted " + ingredientId);
+          messages.put("title", "Successfully deleted " + String.valueOf(ingredientId));
           messages.put("disableSubmit", "true");
         } else {
-          messages.put("title", "Failed to delete " + ingredientId);
+          messages.put("title", "Failed to delete " + String.valueOf(ingredientId));
           messages.put("disableSubmit", "false");
         }
       } catch (SQLException e) {
@@ -62,6 +62,7 @@ public class IngredientsDelete extends HttpServlet {
         throw new IOException(e);
       }
     }
-    req.getRequestDispatcher("/IngredientDelete.jsp").forward(req, resp);
+    req.setAttribute("messages", messages);
+    req.getRequestDispatcher("/IngredientsDelete.jsp").forward(req, resp);
   }
 }

@@ -82,6 +82,7 @@ public class TechniquesUpdate extends HttpServlet {
         e.printStackTrace();
         throw new IOException(e);
       }
+      req.setAttribute("messages", messages);
       req.getRequestDispatcher("/TechniquesUpdate.jsp").forward(req, resp);
     }
   }

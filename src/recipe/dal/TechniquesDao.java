@@ -44,12 +44,11 @@ public class TechniquesDao {
   /**
    * Create techniques.
    *
-   * @param recipe    the recipe
    * @param technique the technique
    * @return the techniques
    * @throws SQLException the sql exception
    */
-  public Techniques create(Recipes recipe, Techniques technique) throws SQLException {
+  public Techniques create(Techniques technique) throws SQLException {
     String insertTechnique = "INSERT INTO Techniques(RecipeId, Description) VALUES(?,?);";
     Connection connection = null;
     PreparedStatement insertStmt = null;
@@ -58,8 +57,9 @@ public class TechniquesDao {
       connection = connectionManager.getConnection();
       insertStmt = connection
           .prepareStatement(insertTechnique, Statement.RETURN_GENERATED_KEYS);
-      insertStmt.setInt(1, recipe.getRecipeId());
+      insertStmt.setInt(1, technique.getRecipe().getRecipeId());
       insertStmt.setString(2, technique.getDescription());
+      insertStmt.executeUpdate();
       resultKey = insertStmt.getGeneratedKeys();
       int techniqueId = -1;
       if (resultKey.next()) {
@@ -80,6 +80,49 @@ public class TechniquesDao {
         insertStmt.close();
       }
     }
+  }
+
+  /**
+   * Gets techniques by id.
+   *
+   * @param techniqueId the technique id
+   * @return the techniques by id
+   * @throws SQLException the sql exception
+   */
+  public Techniques getTechniquesById(Integer techniqueId) throws SQLException {
+    String selectTechniques =
+        "SELECT TechniqueId,RecipeId, Description FROM Techniques WHERE TechniqueId=?;";
+    Connection connection = null;
+    PreparedStatement selectStmt = null;
+    ResultSet results = null;
+    try {
+      connection = connectionManager.getConnection();
+      selectStmt = connection.prepareStatement(selectTechniques);
+      selectStmt.setInt(1, techniqueId);
+      results = selectStmt.executeQuery();
+      if (results.next()) {
+        Integer resultTechniqueId = results.getInt("TechniqueId");
+        Integer resultRecipeId = results.getInt("RecipeId");
+        Recipes newRecipe = new Recipes(resultRecipeId);
+        String resultTechnique = results.getString("Description");
+        Techniques rsTechnique = new Techniques(resultTechniqueId, newRecipe, resultTechnique);
+        return rsTechnique;
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      throw e;
+    } finally {
+      if (connection != null) {
+        connection.close();
+      }
+      if (selectStmt != null) {
+        selectStmt.close();
+      }
+      if (results != null) {
+        results.close();
+      }
+    }
+    return null;
   }
 
   /**
