@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class CommentsDao {
     ResultSet resultKey = null;
     try {
       connection = connectionManager.getConnection();
-      insertStmt = connection.prepareStatement(insertComment);
+      insertStmt = connection.prepareStatement(insertComment, Statement.RETURN_GENERATED_KEYS);
       insertStmt.setInt(1, comment.getUserId());
       insertStmt.setInt(2, comment.getRecipeId());
       insertStmt.setString(3, comment.getContent());

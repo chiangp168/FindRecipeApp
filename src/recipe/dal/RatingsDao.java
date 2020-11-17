@@ -97,7 +97,8 @@ public class RatingsDao {
 					int userId = results.getInt("UserId");
 					int recipeId = results.getInt("RecipeId");
 					UsersDao usersDao = UsersDao.getInstance();
-					Users rsuser = usersDao.getUserByUserId(userId);
+					usersDao.getUsersByUserId(userId);
+					Users rsuser = usersDao.getUsersByUserId(userId);
 					RecipesDao recipesDao = RecipesDao.getInstance();
 					Recipes rsrecipe = recipesDao.getRecipeById(recipeId);
 					
@@ -141,7 +142,7 @@ public class RatingsDao {
 					int userId = results.getInt("UserId");
 					int recipeId = results.getInt("RecipeId");
 					UsersDao usersDao = UsersDao.getInstance();
-					Users rsuser = usersDao.getUserByUserId(userId);
+					Users rsuser = usersDao.getUsersByUserId(userId);
 					
 					RecipesDao recipesDao = RecipesDao.getInstance();
 					Recipes rsrecipe = recipesDao.getRecipeById(recipeId);
@@ -185,7 +186,7 @@ public class RatingsDao {
 					int rsuserId = results.getInt("UserId");
 					int recipeId = results.getInt("RecipeId");
 					UsersDao usersDao = UsersDao.getInstance();
-					Users rsuser = usersDao.getUserByUserId(rsuserId);
+					Users rsuser = usersDao.getUsersByUserId(rsuserId);
 					
 					RecipesDao recipesDao = RecipesDao.getInstance();
 					Recipes rsrecipe = recipesDao.getRecipeById(recipeId);

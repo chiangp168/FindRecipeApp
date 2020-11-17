@@ -95,7 +95,7 @@ public class FavoritesDao {
 					int userId = results.getInt("UserId");
 					int recipeId = results.getInt("RecipeId");
 					UsersDao usersDao = UsersDao.getInstance();
-					Users rsuser = usersDao.getUserByUserId(userId);
+					Users rsuser = usersDao.getUsersByUserId(userId);
 					
 					RecipesDao recipesDao = RecipesDao.getInstance();
 					Recipes rsrecipe = recipesDao.getRecipeById(recipeId);
@@ -139,7 +139,7 @@ public class FavoritesDao {
 					int rsuserId = results.getInt("UserId");
 					int recipeId = results.getInt("RecipeId");
 					UsersDao usersDao = UsersDao.getInstance();
-					Users rsuser = usersDao.getUserByUserId(rsuserId);
+					Users rsuser = usersDao.getUsersByUserId(rsuserId);
 					
 					RecipesDao recipesDao = RecipesDao.getInstance();
 					Recipes rsrecipe = recipesDao.getRecipeById(recipeId);
@@ -183,7 +183,7 @@ public class FavoritesDao {
 					int userId = results.getInt("UserId");
 					int rsrecipeId = results.getInt("RecipeId");
 					UsersDao usersDao = UsersDao.getInstance();
-					Users rsuser = usersDao.getUserByUserId(userId);
+					Users rsuser = usersDao.getUsersByUserId(userId);
 					
 					RecipesDao recipesDao = RecipesDao.getInstance();
 					Recipes rsrecipe = recipesDao.getRecipeById(rsrecipeId);
