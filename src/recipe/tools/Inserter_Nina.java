@@ -17,34 +17,37 @@ public class Inserter_Nina {
 		
 		// CREATE
 		
-		Moderators moderator = new Moderators(41, "nancy_bloom", "password", "Nancy", "Bloom", "nbloom@gmail.com", "3432422", 4, 22);
+		Moderators moderator = new Moderators(43227, "nancy_bloom", "password", "Nancy", "Bloom", "nbloom@gmail.com", "3432422", 4, 22);
 		moderator = moderatorsDao.create(moderator);
 		
-		Moderators moderator1 = new Moderators(42, "felix_harmony", "password", "Felix", "Harmony", "fharmony@gmail.com", "321769", 41, 22);
+		Moderators moderator1 = new Moderators(43327, "felix_harmony", "password", "Felix", "Harmony", "fharmony@gmail.com", "321769", 41, 22);
 		moderator1 = moderatorsDao.create(moderator1);
 		
-		Moderators moderator2 = new Moderators(42, "ferg_jauz", "password", "Ferg", "Jauz", "fjauz@gmail.com", "3242312", 47, 4);
+		Moderators moderator2 = new Moderators(43427, "ferg_jauz", "password", "Ferg", "Jauz", "fjauz@gmail.com", "3242312", 47, 4);
 		moderator2 = moderatorsDao.create(moderator2);
 		
-		Users user1 = new Users(1, "username1", "password1", "firstName1", "lastName1", "email1",
+		Users user1 = new Users(1137, "username1", "password1", "firstName1", "lastName1", "email1",
 	            "phone1");
 		user1 = usersDao.create(user1);
-		Recipes r1 = new Recipes("recipeName1", user1, 15, 3);
+		
+		Recipes r1 = new Recipes("recipeName3331", user1, 15, 3);
 		r1 = recipesDao.create(r1);
+		System.out.println("After Here");
 		
 
-		NutritionFacts nutritionFact = new NutritionFacts(51, 452.00, 12, 3,5, 34,1,4, r1);
+		NutritionFacts nutritionFact = new NutritionFacts(432434, 452.00, 12, 3,5, 34,1,4, r1);
 		nutritionFact = nutritionFactsDao.create(nutritionFact);
 		
-		NutritionFacts nutritionFact1 = new NutritionFacts(52, 321.00, 45, 2, 52, 34,1,4, r1);
+		NutritionFacts nutritionFact1 = new NutritionFacts(5434, 321.00, 45, 2, 52, 34,1,4, r1);
 		nutritionFact1 = nutritionFactsDao.create(nutritionFact1);
 		
-		NutritionFacts nutritionFact2 = new NutritionFacts(53, 321.00, 45, 2, 52, 34,1,23, r1);
+		NutritionFacts nutritionFact2 = new NutritionFacts(52334, 321.00, 45, 2, 52, 34,1,23, r1);
 		nutritionFact2 = nutritionFactsDao.create(nutritionFact2);
+
 		
 		
-		//READ
-		Moderators mod = moderatorsDao.getModeratorById(41);
+//		//READ
+		Moderators mod = moderatorsDao.getModeratorById(4324);
 		System.out.println("Read moderator :" +"id is "+ mod.getUserId());
 		Moderators m = moderatorsDao.delete(mod);
 		System.out.println("After deletion, moderator is: " + mod);
@@ -58,7 +61,7 @@ public class Inserter_Nina {
 			System.out.println("UserId is "+ mi.getUserId());
 		}
 		
-		NutritionFacts nu = nutritionFactsDao.getNutritionFactById(51);
+		NutritionFacts nu = nutritionFactsDao.getNutritionFactById(52334);
 		System.out.println("Read nutrition fact :" +"nutritionId is "+ nu.getNutritionFactsId());
 		
 		NutritionFacts nuRecipe = nutritionFactsDao.getNutritionFactByRecipeId(1);
