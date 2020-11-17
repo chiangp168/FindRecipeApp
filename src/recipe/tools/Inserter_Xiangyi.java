@@ -13,7 +13,7 @@ import recipe.model.Users;
 import recipe.model.Ratings;
 
 public class Inserter_Xiangyi {
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) throws SQLException {	
 		//Xiangyi's Data
 		//DAO instances
 		FavoritesDao favoriteDao = FavoritesDao.getInstance();

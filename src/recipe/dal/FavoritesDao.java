@@ -31,8 +31,8 @@ public class FavoritesDao {
 	// create
 	public Favorites create(Favorites favorite) throws SQLException {
 		String insertFavorites =
-				"INSERT INTO Favorites(FavoriteId, UserId, RecipeId) " +
-				"VALUES(?,?,?);";
+				"INSERT INTO Favorites(UserId, RecipeId) " +
+				"VALUES(?,?);";
 			Connection connection = null;
 			PreparedStatement insertStmt = null;
 			ResultSet resultKey = null;
@@ -42,9 +42,8 @@ public class FavoritesDao {
 				insertStmt = connection.prepareStatement(insertFavorites,
 					Statement.RETURN_GENERATED_KEYS);
 				
-				insertStmt.setInt(1, favorite.getFavoriteId());
-				insertStmt.setInt(2, favorite.getUser().getUserId());
-				insertStmt.setInt(3, favorite.getRecipe().getRecipeId());
+				insertStmt.setInt(1, favorite.getUser().getUserId());
+				insertStmt.setInt(2, favorite.getRecipe().getRecipeId());
 				
 				insertStmt.executeUpdate();
 				
