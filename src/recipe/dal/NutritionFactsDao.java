@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class NutritionFactsDao {
 	protected ConnectionManager connectionManager;
@@ -82,8 +84,8 @@ public class NutritionFactsDao {
 	// UPDATE
 	public NutritionFacts updateNutritionFact(NutritionFacts nutritionFact, double calories, int totalFat, 
 			int sugar, int sodium, int protein, int saturatedFat, int carb, Recipes recipe) throws SQLException {
-		String updateNutritionFact = "UPDATE NutritionFacts SET calories=?, totalFat=?, sugar=?, sodium=?,"
-				+ " protein=?, saturatedFat=?, carb=?, recipeId=? WHERE nutritionFactsId=?;";
+		String updateNutritionFact = "UPDATE NutritionFacts SET calories=?, total_fat=?, sugar=?, sodium=?, "
+				+ "protein=?, Saturated_fat=?, carb=?, recipeId=? WHERE nutritionFactsId=?;";
 		Connection connection = null;
 		PreparedStatement updateStmt = null;
 		try {
@@ -126,9 +128,9 @@ public class NutritionFactsDao {
 	
 	public NutritionFacts getNutritionFactById(int nutritionFactId) throws SQLException {
 		String selectNutrition =
-			"SELECT  NutritionFactId, Calories, Total_fat, Sugar, Sodium, Protein, Saturated_fat, Carb, RecipeId " +
+			"SELECT  NutritionFactsId, Calories, Total_fat, Sugar, Sodium, Protein, Saturated_fat, Carb, RecipeId " +
 			"FROM NutritionFacts " +
-			"WHERE NutritionFactId=?;";
+			"WHERE NutritionFactsId=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
@@ -139,7 +141,7 @@ public class NutritionFactsDao {
 			results = selectStmt.executeQuery();
 			
 			if(results.next()) {
-				int resultNutritionId = results.getInt("NutritionFactId");
+				int resultNutritionId = results.getInt("NutritionFactsId");
 				double calories = results.getDouble("Calories");
 				int totalFat = results.getInt("Total_Fat");
 				int sugar = results.getInt("Sugar");
@@ -174,7 +176,7 @@ public class NutritionFactsDao {
 	
 	public NutritionFacts getNutritionFactByRecipeId(int recipeId) throws SQLException {
 		String selectNutrition =
-			"SELECT  RecipeId, Calories, Total_fat, Sugar, Sodium, Protein, Saturated_fat, Carb, NutritionFactId " +
+			"SELECT  RecipeId, Calories, Total_fat, Sugar, Sodium, Protein, Saturated_fat, Carb, NutritionFactsId " +
 			"FROM NutritionFacts " +
 			"WHERE RecipeId=?;";
 		Connection connection = null;
@@ -195,7 +197,7 @@ public class NutritionFactsDao {
 				int protein = results.getInt("Protein");
 				int saturatedFat = results.getInt("Saturated_fat");
 				int carb = results.getInt("Carb");
-				int nutritionFactId = results.getInt("NutritionFactId");
+				int nutritionFactId = results.getInt("NutritionFactsId");
 				
 				Recipes recipe = RecipesDao.getInstance().getRecipeById(resultRecipeId);
 				
@@ -220,6 +222,59 @@ public class NutritionFactsDao {
 		return null;
 	}
 	
+	public List<NutritionFacts> getNutritionFactsByProtein(int proteinPercentage) throws SQLException {
+		List<NutritionFacts> nutritionFacts = new ArrayList<NutritionFacts>();
+		
+		String selectNutritionFact =
+			"SELECT RecipeId, Calories, Total_fat, Sugar, Sodium, Protein, Saturated_fat, Carb, NutritionFactsId"
+			+ " FROM NutritionFacts WHERE Protein=?;";
+		
+		Connection connection = null;
+		PreparedStatement selectStmt = null;
+		ResultSet results = null;
+		try {
+			connection = connectionManager.getConnection();
+			selectStmt = connection.prepareStatement(selectNutritionFact);
+			selectStmt.setInt(1, proteinPercentage);
+			results = selectStmt.executeQuery();
+			
+			if(results.next()) {
+				int nutritionFactsId = results.getInt("NutritionFactsId");
+				int recipeId = Integer.parseInt(results.getString("RecipeId"));
+				double calories = Double.parseDouble(results.getString("Calories"));
+				int totalFat = Integer.parseInt(results.getString("Total_fat"));
+				int sugar = Integer.parseInt(results.getString("Sugar"));
+				int sodium = Integer.parseInt(results.getString("Sodium"));
+				int protein = Integer.parseInt(results.getString("Protein"));
+				int saturatedFat = Integer.parseInt(results.getString("Saturated_fat"));
+				int carb = Integer.parseInt(results.getString("Carb"));
+				try {
+					Recipes recipe = RecipesDao.getInstance().getRecipeById(recipeId);
+					NutritionFacts nutritionFact = new NutritionFacts(nutritionFactsId, calories, totalFat, sugar, sodium, protein, saturatedFat, carb, recipe);
+					nutritionFacts.add(nutritionFact);
+				} catch (SQLException e) {
+					e.printStackTrace();
+					throw e;
+				}
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(selectStmt != null) {
+				selectStmt.close();
+			}
+			if(results != null) {
+				results.close();
+			}
+		}
+		return nutritionFacts;
+	}
+	
 	// DELETE
 	public NutritionFacts delete(NutritionFacts nutritionFact) throws SQLException {
 		String deleteNutritionFact = 
@@ -234,7 +289,7 @@ public class NutritionFactsDao {
 			
 			int affectedRows = deleteStmt.executeUpdate();
 			if (affectedRows == 0) {
-				throw new SQLException("No records available to delete for NutritionFactId=" + nutritionFact.getNutritionFactsId());
+				throw new SQLException("No records available to delete for NutritionFactsId=" + nutritionFact.getNutritionFactsId());
 			}
 			return null;
 			

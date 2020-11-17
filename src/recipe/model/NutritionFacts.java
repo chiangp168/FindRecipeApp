@@ -35,7 +35,7 @@ public class NutritionFacts {
 	public void setNutritionFactsId(int nutritionFactsId) {
 		this.nutritionFactsId = nutritionFactsId;
 	}
-	
+	 
 	public double getCalories() {
 		return calories;
 	}
