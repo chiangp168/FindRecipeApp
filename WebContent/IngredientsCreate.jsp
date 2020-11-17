@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Create a Ingredient</title>
+<title>Create an Ingredient</title>
 </head>
 <body>
 	<h1>Create ingredient</h1>

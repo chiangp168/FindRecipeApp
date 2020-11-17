@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Delete a Ingredient</title>
+<title>Delete an Ingredient</title>
 </head>
 <body>
 	<h1>${messages.title}</h1>
