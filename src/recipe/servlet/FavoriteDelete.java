@@ -46,7 +46,7 @@ public class FavoriteDelete extends HttpServlet {
         String favoriteId = req.getParameter("favoriteId");
         
         if (favoriteId == null || favoriteId.trim().isEmpty()) {
-            messages.put("success", "Invalid favoriteId");
+            messages.put("title", "Invalid favoriteId");
         } 
         else {
 			try {
@@ -59,7 +59,7 @@ public class FavoriteDelete extends HttpServlet {
 				e1.printStackTrace();
 			}
         	if(favorite == null) {
-        		messages.put("success", "Didn't find relevant favorite");
+        		messages.put("title", "Didn't find relevant favorite");
         	}
         		else {
         			try {
@@ -79,7 +79,7 @@ public class FavoriteDelete extends HttpServlet {
 			    }
         	}
         }
-        req.getRequestDispatcher("/UserDelete.jsp").forward(req, resp);        
+        req.getRequestDispatcher("/FavoriteDelete.jsp").forward(req, resp);        
 	}
 }
 

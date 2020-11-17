@@ -47,7 +47,7 @@ public class RatingDelete extends HttpServlet {
         String ratingId = req.getParameter("ratingId");
         
         if (ratingId == null || ratingId.trim().isEmpty()) {
-            messages.put("success", "Invalid ratingId");
+            messages.put("title", "Invalid ratingId");
         } 
         else {
         	try {
@@ -60,7 +60,7 @@ public class RatingDelete extends HttpServlet {
 				e1.printStackTrace();
 			}
         	if(rating == null) {
-        		 messages.put("success", "Didn't find relevant rating");
+        		 messages.put("title", "Didn't find relevant rating");
         }
         
         else {

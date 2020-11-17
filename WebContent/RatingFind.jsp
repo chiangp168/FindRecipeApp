@@ -12,7 +12,7 @@
 </head>
 <body>
 	<form action="ratingfind" method="post">
-		<h1>Search for a rating By RatingPoints</h1>
+		<h1>Search for A Rating By RatingPoints</h1>
 		<p>
 			<label for="ratingPoint">RatingPoints</label>
 			<input id="ratingPoint" name="ratingPoint" value="${fn:escapeXml(param.ratingPonit)}">
