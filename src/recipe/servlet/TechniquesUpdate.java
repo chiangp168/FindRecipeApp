@@ -18,12 +18,10 @@ import recipe.model.Techniques;
 public class TechniquesUpdate extends HttpServlet {
 
   protected TechniquesDao techniquesDao;
-  protected RecipesDao recipesDao;
 
   @Override
   public void init() throws ServletException {
     techniquesDao = techniquesDao.getInstance();
-    recipesDao = recipesDao.getInstance();
   }
 
   @Override

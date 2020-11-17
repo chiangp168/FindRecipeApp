@@ -19,7 +19,6 @@ import recipe.model.Ingredients;
 public class IngredientsDelete extends HttpServlet {
 
   protected IngredientsDao ingredientsDao;
-  protected RecipesDao recipesDao;
 
   @Override
   public void init() throws ServletException {

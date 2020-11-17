@@ -18,7 +18,6 @@ import recipe.model.Techniques;
 public class TechniquesDelete extends HttpServlet {
 
   protected TechniquesDao techniquesDao;
-  protected RecipesDao recipesDao;
 
   @Override
   public void init() throws ServletException {
