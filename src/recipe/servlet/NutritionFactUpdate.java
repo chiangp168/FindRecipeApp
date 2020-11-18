@@ -44,7 +44,7 @@ public class NutritionFactUpdate extends HttpServlet {
 	        throw new IOException(e);
 	      }
 	    }
-	    req.getRequestDispatcher("/NutritionUpdate.jsp").forward(req, resp);
+	    req.getRequestDispatcher("/NutritionFactUpdate.jsp").forward(req, resp);
 	  }
 	
 	@Override
@@ -106,7 +106,7 @@ public class NutritionFactUpdate extends HttpServlet {
 	        	}
         		}
         
-        req.getRequestDispatcher("/NutritionUpdate.jsp").forward(req, resp);
+        req.getRequestDispatcher("/NutritionFactUpdate.jsp").forward(req, resp);
         } catch (SQLException e) {
 			e.printStackTrace();
 			throw new IOException(e);
