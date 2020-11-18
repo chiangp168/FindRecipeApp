@@ -32,7 +32,7 @@ public class NutritionFactDelete extends HttpServlet {
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
         messages.put("title", "Delete Nutrition Fact");        
-        req.getRequestDispatcher("/NutritionDelete.jsp").forward(req, resp);
+        req.getRequestDispatcher("/NutritionFactDelete.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -69,7 +69,7 @@ public class NutritionFactDelete extends HttpServlet {
 	        }
         }
         
-        req.getRequestDispatcher("/NutritionDelete.jsp").forward(req, resp);
+        req.getRequestDispatcher("/NutritionFactDelete.jsp").forward(req, resp);
     }
 		
 }

@@ -37,7 +37,7 @@ public class NutritionFactCreate extends HttpServlet {
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
         //Just render the JSP.   
-        req.getRequestDispatcher("/NutritionCreate.jsp").forward(req, resp);
+        req.getRequestDispatcher("/NutritionFactCreate.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -76,7 +76,7 @@ public class NutritionFactCreate extends HttpServlet {
 				throw new IOException(e);
 	        }
 		}
-		req.getRequestDispatcher("/NutritionCreate.jsp").forward(req, resp);
+		req.getRequestDispatcher("/NutritionFactCreate.jsp").forward(req, resp);
 
 	}
 }
