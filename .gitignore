@@ -33,3 +33,8 @@ build/
 java/build/**
 
 src/recipe/dal/ConnectionManager.java
+
+# our project
+.metadata/
+.settings/
+.classpath

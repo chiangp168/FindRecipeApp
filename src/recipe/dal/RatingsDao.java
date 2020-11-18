@@ -31,8 +31,8 @@ public class RatingsDao {
 	//create
 	public Ratings create(Ratings rating) throws SQLException {
 		String insertRatings =
-				"INSERT INTO Ratings(RatingId, RatingPoints, UserId, RecipeId) " +
-				"VALUES(?,?,?,?);";
+				"INSERT INTO Ratings(RatingPoints, UserId, RecipeId) " +
+				"VALUES(?,?,?);";
 			Connection connection = null;
 			PreparedStatement insertStmt = null;
 			ResultSet resultKey = null;
@@ -41,11 +41,9 @@ public class RatingsDao {
 				
 				insertStmt = connection.prepareStatement(insertRatings,
 					Statement.RETURN_GENERATED_KEYS);
-				
-				insertStmt.setInt(1, rating.getRatingId());
-				insertStmt.setInt(2, rating.getRatingPoints());
-				insertStmt.setInt(3, rating.getUser().getUserId());
-				insertStmt.setInt(4, rating.getRecipes().getRecipeId());
+				insertStmt.setInt(1, rating.getRatingPoints());
+				insertStmt.setInt(2, rating.getUser().getUserId());
+				insertStmt.setInt(3, rating.getRecipes().getRecipeId());
 				
 				insertStmt.executeUpdate();
 				
