@@ -21,7 +21,7 @@ public class UsersDao extends PersonDao{
     }
 
     public Users create(Users users) throws SQLException {
-		create(new Person(users.getUserId(), users.getUserName(), users.getPassword(), users.getFirstName(),
+		Person addedPerson = create(new Person(users.getUserId(), users.getUserName(), users.getPassword(), users.getFirstName(),
             users.getLastName(), users.getEmail(), users.getPhone()));
 
         String insertUser = 
@@ -35,6 +35,7 @@ public class UsersDao extends PersonDao{
             insertStmt.setInt(1, users.getUserId());
 
 			insertStmt.executeUpdate();
+			users.setUserId(addedPerson.getUserId());
 			return users;
 		} catch (SQLException e) {
 			e.printStackTrace();
