@@ -1,6 +1,5 @@
 package recipe.servlet;
 
-import blog.model.BlogUsers;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
