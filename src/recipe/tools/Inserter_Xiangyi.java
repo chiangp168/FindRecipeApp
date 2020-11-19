@@ -14,6 +14,30 @@ import recipe.model.Ratings;
 
 public class Inserter_Xiangyi {
 	public static void main(String[] args) throws SQLException {	
+		UsersDao usersDao = UsersDao.getInstance();
+		RecipesDao recipesDao = RecipesDao.getInstance();
+		
+		// create.
+		Users user1 = new Users(1, "username1", "password1", "firstName1", "lastName1", "email1",
+	            "phone1");
+		user1 = usersDao.create(user1);
+		
+		Users user2 = new Users(2, "username2", "password2", "firstName2", "lastName2", "email2",
+	            "phone2");
+		user2 = usersDao.create(user2);
+		
+		Recipes r1 = new Recipes("recipeName1", user1, 15, 3);
+		r1 = recipesDao.create(r1);
+		
+		Recipes r2 = new Recipes("recipeName2", user1, 20, 4);
+		r2 = recipesDao.create(r2);
+		
+		Recipes r3 = new Recipes("recipeName3", user2, 15, 4);
+		r3 = recipesDao.create(r3);
+		
+		Recipes r4 = new Recipes("recipeName4", user2, 20, 3);
+		r4 = recipesDao.create(r4);
+		
 		//Xiangyi's Data
 		//DAO instances
 		FavoritesDao favoriteDao = FavoritesDao.getInstance();
