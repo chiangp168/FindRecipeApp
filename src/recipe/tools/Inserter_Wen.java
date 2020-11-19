@@ -39,7 +39,7 @@ public class Inserter_Wen {
 		//read
 		Recipes recipe = recipesDao.getRecipeById(1);
 		System.out.println("Read recipe:" +"recipeId is "+recipe.getRecipeId());
-		
+
 		List<Recipes> recipelist1 = recipesDao.getRecipesByRecipeName("recipeName1");
 		System.out.println("reading recipe list:");
 		for(Recipes r:recipelist1) {
