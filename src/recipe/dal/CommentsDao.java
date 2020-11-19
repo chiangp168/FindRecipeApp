@@ -185,7 +185,7 @@ public class CommentsDao {
       connection = connectionManager.getConnection();
       selectStmt = connection.prepareStatement(selectRecipe);
       selectStmt.setInt(1, recipeId);
-      selectStmt.setInt(1, userId);
+      selectStmt.setInt(2, userId);
       results = selectStmt.executeQuery();
       while(results.next()) {
         Integer commentId = results.getInt("CommentId");

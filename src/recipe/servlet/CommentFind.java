@@ -53,7 +53,8 @@ public class CommentFind extends HttpServlet {
         } catch (NumberFormatException e) {
           messages.put("title", "invalid recipeId");
         }
-      } if (userIdStr.length() != 0) {
+      }
+      if (userIdStr.length() != 0) {
         try {
           userId = Integer.valueOf(userIdStr);
         } catch (NumberFormatException e) {
@@ -76,7 +77,7 @@ public class CommentFind extends HttpServlet {
         e.printStackTrace();
         throw new IOException(e);
       }
-      req.getRequestDispatcher("/CommentFind.jsp").forward(req, resp);
     }
+    req.getRequestDispatcher("/CommentFind.jsp").forward(req, resp);
   }
 }

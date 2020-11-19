@@ -64,9 +64,9 @@ public class CommentCreate extends HttpServlet {
         } else if (user == null) {
           messages.put("success", "Invalid UserId");
         } else {
-          Comments newComment = new Comments(recipeId, userId, content, LocalDateTime.now());
+          Comments newComment = new Comments(userId, recipeId, content, LocalDateTime.now());
           Comments comments = commentsDao.create(newComment);
-          messages.put("success", "Successfully created comment " + comments.getCommentId() + " with content" + comments.getContent());
+          messages.put("success", "Successfully created comment " + comments.getCommentId() + " with content " + comments.getContent());
         }
       } catch (SQLException | NumberFormatException e) {
         e.printStackTrace();
