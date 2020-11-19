@@ -26,13 +26,14 @@ public class PersonDao {
 		String insertPerson = "INSERT INTO Person(UserId,UserName,UserPassword,FirstName,LastName,Email,Phone) VALUES(?,?,?,?,?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
+		ResultSet resultKey = null;
 		try {
 			connection = connectionManager.getConnection();
 			insertStmt = connection.prepareStatement(insertPerson);
 		
 			insertStmt.setInt(1, person.getUserId());
-		    	insertStmt.setString(2, person.getUserName());
-		    	insertStmt.setString(3, person.getPassword());
+		    insertStmt.setString(2, person.getUserName());
+		    insertStmt.setString(3, person.getPassword());
 			insertStmt.setString(4, person.getFirstName());
 			insertStmt.setString(5, person.getLastName());
 			insertStmt.setString(6, person.getEmail());
@@ -40,6 +41,14 @@ public class PersonDao {
 			
 			insertStmt.executeUpdate();
 			
+			//resultKey = insertStmt.getGeneratedKeys();
+			//int personId = -1;
+			//if(resultKey.next()) {
+			//	personId = resultKey.getInt(1);
+			//} else {
+			//	throw new SQLException("Unable to retrieve auto-generated key.");
+			//}
+			//person.setUserId(personId);
 			return person;
 		} catch (SQLException e) {
 			e.printStackTrace();
