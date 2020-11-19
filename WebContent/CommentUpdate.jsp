@@ -13,7 +13,7 @@
 <h1>Update comment</h1>
 <form action="commentsupdate" method="post">
     <p>
-        <label for="commentId">Comment Id</label>
+        <label for="commentId">Comment</label>
         <input id="commentId" name="commentId" value="${fn:escapeXml(param.commentId)}">
     </p>
     <p>

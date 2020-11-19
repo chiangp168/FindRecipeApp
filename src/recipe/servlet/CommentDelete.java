@@ -2,7 +2,6 @@ package recipe.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -11,12 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import recipe.dal.CommentsDao;
-import recipe.dal.RecipesDao;
-import recipe.dal.UsersDao;
 import recipe.model.Comments;
-import recipe.model.Recipes;
-import recipe.model.Users;
-
 
 @WebServlet("/commentsdelete")
 public class CommentDelete extends HttpServlet {

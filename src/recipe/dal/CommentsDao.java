@@ -174,6 +174,42 @@ public class CommentsDao {
     return list;
   }
 
+  public List<Comments> getCommentsByIds(int recipeId, int userId) throws SQLException{
+    List<Comments> list = new ArrayList<Comments>();
+    String selectRecipe =
+        "SELECT * FROM Comments WHERE RecipeId=? AND UserId=?;";
+    Connection connection = null;
+    PreparedStatement selectStmt = null;
+    ResultSet results = null;
+    try {
+      connection = connectionManager.getConnection();
+      selectStmt = connection.prepareStatement(selectRecipe);
+      selectStmt.setInt(1, recipeId);
+      selectStmt.setInt(1, userId);
+      results = selectStmt.executeQuery();
+      while(results.next()) {
+        Integer commentId = results.getInt("CommentId");
+        String content = results.getString("ShortComment");
+        LocalDateTime created = results.getTimestamp("Created").toLocalDateTime();
+        Comments comment = new Comments(commentId, userId, recipeId, content, created);
+        list.add(comment);
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      throw e;
+    } finally {
+      if(connection != null) {
+        connection.close();
+      }
+      if(selectStmt != null) {
+        selectStmt.close();
+      }
+      if(results != null) {
+        results.close();
+      }
+    }
+    return list;
+  }
   public Comments updateByCommentId(Comments comments, String newContent) throws SQLException {
     String updateRecipe = "UPDATE Comments set ShortComment=? where CommentId=?;";
     Connection connection = null;

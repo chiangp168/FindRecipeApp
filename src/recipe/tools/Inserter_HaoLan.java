@@ -14,7 +14,7 @@ public class Inserter_HaoLan {
 
   public static void main(String[] args) throws SQLException {
     // create
-    Comments newCommet = new Comments(2, 40, "new comment", LocalDateTime.now());
+    Comments newCommet = new Comments(27, 40, "new comment", LocalDateTime.now());
     CommentsDao commentsDao = CommentsDao.getInstance();
     commentsDao.create(newCommet);
     System.out.printf("create new comment with id: %d \n", newCommet.getCommentId());
@@ -25,8 +25,8 @@ public class Inserter_HaoLan {
 
     // select by users id
     System.out.println("___________");
-    System.out.printf("select by users id: 2\n");
-    List<Comments> comments = commentsDao.getCommentsByUserId(2);
+    System.out.printf("select by users id: 27\n");
+    List<Comments> comments = commentsDao.getCommentsByUserId(27);
     for (Comments comment : comments) {
       System.out.printf("User: %d, Content: %s \n", comment.getUserId(), comment.getContent());
     }

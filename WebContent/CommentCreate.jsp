@@ -18,7 +18,7 @@
         <input id="userId" name="userId" value="">
     </p>
     <p>
-        <label for="content">Content Id</label>
+        <label for="content">Content</label>
         <input id="content" name="content" value="">
     </p>
     <p>

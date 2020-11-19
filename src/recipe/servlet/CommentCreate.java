@@ -58,7 +58,7 @@ public class CommentCreate extends HttpServlet {
       String content = req.getParameter("content");
       try {
         Recipes recipe = recipesDao.getRecipeById(recipeId);
-        Users user = usersDao.getUsersByUserId(recipeId);
+        Users user = usersDao.getUsersByUserId(userId);
         if (recipe == null) {
           messages.put("success", "Invalid RecipeId");
         } else if (user == null) {
@@ -68,7 +68,7 @@ public class CommentCreate extends HttpServlet {
           Comments comments = commentsDao.create(newComment);
           messages.put("success", "Successfully created comment " + comments.getCommentId() + " with content" + comments.getContent());
         }
-      } catch (SQLException e) {
+      } catch (SQLException | NumberFormatException e) {
         e.printStackTrace();
         throw new IOException(e);
       }

@@ -7,55 +7,46 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Update a Nutrition Fact</title>
+    <title>Find Comments</title>
 </head>
 <body>
-<h1>Update Nutrition Fact</h1>
-<form action="nutritionupdate" method="post">
+<h1>${messages.title}</h1>
+<h1>Find Comments</h1>
+<form action="commentsfind" method="post">
+    <h1>Search for Comments</h1>
     <p>
-        <label for="nutritionFactsId">Nutrition Fact Id: </label>
-        <input id="nutritionFactsId" name="nutritionFactsId" value="${fn:escapeXml(param.nutritionFactsId)}">
+        <label for="userId">UserId</label>
+        <input id="userId" name="userId" value="${fn:escapeXml(param.userId)}">
     </p>
     <p>
-        <label for="calories">New Calories: </label>
-        <input id="calories" name="calories" value="">
-    </p>
-    <p>
-        <label for="totalFat">New total fat: </label>
-        <input id="totalFat" name="totalFat" value="">
-    </p>
-    <p>
-        <label for="sugar">New sugar: </label>
-        <input id="sugar" name="sugar" value="">
-    </p>
-    <p>
-        <label for="sodium">New sodium: </label>
-        <input id="sodium" name="sodium" value="">
-    </p>
-    <p>
-        <label for="protein">New protein: </label>
-        <input id="protein" name="protein" value="">
-    </p>
-    <p>
-        <label for="saturatedFat">New saturated fat: </label>
-        <input id="saturatedFat" name="saturatedFat" value="">
-    </p>
-    <p>
-        <label for="carb">New carb: </label>
-        <input id="carb" name="carb" value="">
-    </p>
-    <p>
-        <label for="recipeId">New recipe Id: </label>
-        <input id="recipeId" name="recipeId" value="">
+        <label for="recipeId">recipeId</label>
+        <input id="recipeId" name="recipeId" value="${fn:escapeXml(param.recipeId)}">
     </p>
     <p>
         <input type="submit">
+        <br/><br/><br/>
+        <span id="successMessage"><b>${messages.success}</b></span>
     </p>
 </form>
-<br/><br/>
-<p>
-    <span id="successMessage"><b>${messages.success}</b></span>
-</p>
+<h1>Matching Comments</h1>
+<table border="1">
+    <tr>
+        <th>commentId</th>
+        <th>userId</th>
+        <th>recipeId</th>
+        <th>content</th>
+        <th>createdTime</th>
+    </tr>
+    <c:forEach items="${comments}" var="comment" >
+        <tr>
+            <td><c:out value="${comment.getCommentId()}"/></td>
+            <td><c:out value="${comment.getUserId()}" /></td>
+            <td><c:out value="${comment.getRecipeId()}" /></td>
+            <td><c:out value="${comment.getContent()}" /></td>
+            <td><c:out value="${comment.getCreatedTime()}" /></td>
+        </tr>
+    </c:forEach>
+</table>
 </body>
 </html>
 

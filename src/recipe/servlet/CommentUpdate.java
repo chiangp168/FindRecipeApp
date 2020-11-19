@@ -51,7 +51,7 @@ public class CommentUpdate extends HttpServlet {
           commentsDao.updateByCommentId(comments, newContent);
           messages.put("success", "Successfully updated comment with id " + comments.getCommentId());
         }
-      } catch (SQLException e) {
+      } catch (SQLException | NumberFormatException e) {
         e.printStackTrace();
         throw new IOException(e);
       }
