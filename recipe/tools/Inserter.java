@@ -292,7 +292,9 @@ public class Inserter {
 		Ratings ratingUpdate = ratingDao.updateByRatingPoints(rating1, 5);
 		System.out.println("Update Rating is " + ratingUpdate.getRatingPoints());
 		
-		
+		commentsDao.updateByCommentId(newCommet, "updated");
+		System.out.printf("update new comment with new content: %s \n", newCommet.getContent());
+		System.out.println("___________");
 
 		// DELETE
 		
