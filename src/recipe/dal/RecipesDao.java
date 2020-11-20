@@ -288,10 +288,7 @@ public class RecipesDao {
 			connection = connectionManager.getConnection();
 			deleteStmt = connection.prepareStatement(deleteRecipe);
 			deleteStmt.setInt(1, recipe.getRecipeId());
-			int affectedRows = deleteStmt.executeUpdate();	
-			if (affectedRows == 0) {
-				throw new SQLException("No records available to delete for RecipeId =" + recipe.getRecipeId());
-			}
+			deleteStmt.executeUpdate();	
 			return null;
 		} catch (SQLException e) {
 			e.printStackTrace();

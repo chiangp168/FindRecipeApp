@@ -38,3 +38,4 @@ src/recipe/dal/ConnectionManager.java
 .metadata/
 .settings/
 .classpath
+/bin/

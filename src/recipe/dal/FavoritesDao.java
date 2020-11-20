@@ -217,10 +217,8 @@ public class FavoritesDao {
 			connection = connectionManager.getConnection();
 			deleteStmt = connection.prepareStatement(deleteFavorite);
 			deleteStmt.setInt(1, favorite.getFavoriteId());
-			int affectedRows = deleteStmt.executeUpdate();	
-			if (affectedRows == 0) {
-				throw new SQLException("No records available to delete for FavoriteId =" + favorite.getFavoriteId());
-			}
+			deleteStmt.executeUpdate();	
+		
 			return null;
 		} catch (SQLException e) {
 			e.printStackTrace();

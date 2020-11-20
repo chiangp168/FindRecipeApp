@@ -104,7 +104,7 @@ public class ModeratorsDao  extends PersonDao {
 	public Moderators getModeratorByUserName(String username) throws SQLException {
 		String selectModerator =
 			"SELECT Moderators.UserId, UserName, UserPassword, FirstName, LastName, Email, Phone, NumOfRecipesDeleted, NumOfRecipesApproved "
-			+ "FROM Moderators INNER JOIN Person ON Moderators.UserId = Person.UserId WHERE Moderators.UserName=?;";
+			+ "FROM Moderators INNER JOIN Person ON Moderators.UserId = Person.UserId WHERE UserName=?;";
 		
 		Connection connection = null;
 		PreparedStatement selectStmt = null;

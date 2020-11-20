@@ -112,11 +112,8 @@ public class UsersDao extends PersonDao{
             connection = connectionManager.getConnection();
             deleteStmt = connection.prepareStatement(deleteUser);
             deleteStmt.setInt(1, user.getUserId());
-            int affectedRows = deleteStmt.executeUpdate();
-            if (affectedRows == 0) {
-                throw new SQLException("No records available to delete for UserId=" + user.getUserName());
-            }
-
+            deleteStmt.executeUpdate();
+            
             super.delete(user);
 
             return null;

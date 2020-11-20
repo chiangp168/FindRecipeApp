@@ -244,10 +244,8 @@ public class RatingsDao {
 			connection = connectionManager.getConnection();
 			deleteStmt = connection.prepareStatement(deleteRating);
 			deleteStmt.setInt(1, rating.getRatingId());
-			int affectedRows = deleteStmt.executeUpdate();	
-			if (affectedRows == 0) {
-				throw new SQLException("No records available to delete for RatingId =" + rating.getRatingId());
-			}
+			deleteStmt.executeUpdate();	
+			
 			return null;
 		} catch (SQLException e) {
 			e.printStackTrace();
