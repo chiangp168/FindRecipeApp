@@ -39,3 +39,5 @@ src/recipe/dal/ConnectionManager.java
 .settings/
 .classpath
 /bin/
+pom.xml
+/out/
