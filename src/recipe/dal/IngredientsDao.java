@@ -239,8 +239,8 @@ public class IngredientsDao {
   /**
    * Gets Recipes by ingredients.
    *
-   * @param recipe the recipe
-   * @return the ingredients by recipe
+   * @param ingredientList a list of string
+   * @return the recipes that contains the ingredient
    * @throws SQLException the sql exception
    */
   public List<Recipes> getRecipebyIngredientList(List<String> ingredientList) throws SQLException {
