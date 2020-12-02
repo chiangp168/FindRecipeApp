@@ -235,5 +235,62 @@ public class IngredientsDao {
       }
     }
   }
+  
+  /**
+   * Gets Recipes by ingredients.
+   *
+   * @param recipe the recipe
+   * @return the ingredients by recipe
+   * @throws SQLException the sql exception
+   */
+  public List<Recipes> getRecipebyIngredientList(List<String> ingredientList) throws SQLException {
+    List<Recipes> recipes = new ArrayList<Recipes>();
+    String selectRecipes =
+        "SELECT Recipes.RecipeId, \n"
+        + "Recipes.RecipeName,\n"
+        + "Recipes.UserId, \n"
+        + "Recipes.TimeToCook,\n"
+        + "Recipes.NumOfStep FROM Recipes\n"
+        + "JOIN Ingredients\n"
+        + "ON Recipes.RecipeId = Ingredients.RecipeId\n"
+        + "WHERE Ingredient = ?\n"
+        + "LIMIT 5;";
+    Connection connection = null;
+    PreparedStatement selectStmt = null;
+    ResultSet results = null;
+    try {
+      for (int i = 0; i < ingredientList.size();i ++) {
+      connection = connectionManager.getConnection();
+      selectStmt = connection.prepareStatement(selectRecipes);
+      selectStmt.setString(1, ingredientList.get(i));
+      results = selectStmt.executeQuery();
+      while (results.next()) {
+    	  int rsrecipeId = results.getInt("RecipeId");
+			String rsrecipeName = results.getString("RecipeName");
+			int timeToCook = results.getInt("TimeToCook");
+			int numOfStep = results.getInt("NumOfStep");
+			int rsuserId = results.getInt("UserId");
+			UsersDao usersDao = UsersDao.getInstance();
+			Users rsuser = usersDao.getUsersByUserId(rsuserId);
+			Recipes rsRecipe = new Recipes(rsrecipeId, rsrecipeName, rsuser, timeToCook, numOfStep);
+			recipes.add(rsRecipe);
+      }
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      throw e;
+    } finally {
+      if (connection != null) {
+        connection.close();
+      }
+      if (selectStmt != null) {
+        selectStmt.close();
+      }
+      if (results != null) {
+        results.close();
+      }
+    }
+    return recipes;
+  }
 
 }
