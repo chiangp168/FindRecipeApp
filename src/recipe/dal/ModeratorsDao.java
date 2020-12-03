@@ -164,7 +164,7 @@ public class ModeratorsDao  extends PersonDao {
 			selectStmt.setInt(1, numOfDelete);
 			results = selectStmt.executeQuery();
 			
-			if(results.next()) {
+			while (results.next()) {
 				int resultUserId = results.getInt("UserId");
 				String userName = results.getString("UserName");
 				String password = results.getString("UserPassword");

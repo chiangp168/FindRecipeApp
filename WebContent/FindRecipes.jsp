@@ -6,46 +6,78 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Find a Recipe</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="RecipeApplication1/WebContent/WEB-INF/resource/font-awesome.min.css">
+    <link href="./css/index.css" rel="stylesheet" type="text/css">
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>Find a Recipe</title>
 </head>
+
 <body>
-	<form action="findrecipes" method="post">
-		<h1>Search for a Recipe by RecipeName</h1>
-		<p>
-			<label for="recipename">RecipeName</label>
-			<input id="recipename" name="recipename" value="${fn:escapeXml(param.recipename)}">
-		</p>
-		<p>
-			<input type="submit">
-			<br/><br/><br/>
-			<span id="successMessage"><b>${messages.success}</b></span>
-		</p>
-	</form>
-	<br/>
-	<div id="recipeCreate"><a href="recipecreate">Create Recipe</a></div>
-	<br/>
-	<h1>Matching Recipes</h1>
-        <table border="1">
-            <tr>
-                <th>RecipeName</th>
-                <th>UserName</th>
-                <th>Time To Cook</th>
-                <th>Number Of Steps</th>
-                <th>Delete Recipe</th>
-                <th>Update Recipe</th>
-            </tr>
-            <c:forEach items="${recipes}" var="recipe" >
-                <tr>
-                    <td><c:out value="${recipe.getRecipeName()}" /></td>
-                    <td><c:out value="${recipe.getUser().getUserName()}" /></td>
-                    <td><c:out value="${recipe.getTimeToCook()}" /></td>
-                    <td><c:out value="${recipe.getNumOfStep()}" /></td>
-                    <td><a href="recipedelete?recipename=<c:out value="${recipe.getRecipeName()}"/>">Delete</a></td>
-                    <td><a href="recipeupdate?recipename=<c:out value="${recipe.getRecipeName()}"/>">Update</a></td>
-                </tr>
-            </c:forEach>
-       </table>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.jsp">WFH Kitchen</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.jsp">Recipes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="CommentFind.jsp">Comments</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="RatingFind.jsp">Ratings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="FavoriteFind.jsp">Favorites</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="FindNutritionFacts.jsp">NutritionFacts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="TechniquesRead.jsp">Techniques</a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+    <div>
+
+        <h1><span id="successMessage"><b>${messages.success}</b></span></h1>
+        <c:forEach items="${recipes}" var="recipe">
+            <div class="col-sm-8">
+                <div class="card" styles={{width: '18rem', align-items: center;}}>
+                    <img class="card-img-top" src="https://picsum.photos/300/200" />
+                    <div class="card-body">
+                        <h3 class="card-title">
+                            <c:out value="${recipe.getRecipeName()}" />
+                        </h3>
+                        <p>Time to cook:
+                            <c:out value="${recipe.getTimeToCook()}" /> minutes
+                        </p>
+                        <p>Number of steps:
+                            <c:out value="${recipe.getNumOfStep()}" />
+                        </p>
+                        <a href="#" class="btn btn-primary">More...</a>
+                    </div>
+                </div>
+            </div>
+
+
+        </c:forEach>
+    </div>
+
+
 </body>
+
 </html>

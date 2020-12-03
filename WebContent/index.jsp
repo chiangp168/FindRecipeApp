@@ -7,12 +7,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="RecipeApplication1/WebContent/WEB-INF/resource/font-awesome.min.css">
-    <link href="./css/index.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="RecipeApplication1/WebContent/WEB-INF/resource/font-awesome.min.css">
+<link href="./css/index.css" rel="stylesheet" type="text/css">
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Find a Technique</title>
+<title>Welcome to WFH Kitchen</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -49,37 +49,17 @@
 
         </div>
     </nav>
-	<form action="techniquesread" method="post">
-		<h1>Search for technique by Recipe Id</h1>
-		<p>
-			<label for="recipeId">Recipe Id</label>
-			<input id="recipeId" name="recipeId" value="${fn:escapeXml(param.recipeId)}">
-		</p>
-		<p>
-			<input type="submit">
-			<br/><br/><br/>
-			<span id="successMessage"><b>${messages.success}</b></span>
-		</p>
-	</form>
-	<br/>
-	<div id="techniquesCreate"><a href="techniquescreate">Create Technique</a></div>
-	<br/>
-	<h1>Matching Techniques</h1>
-        <table border="1">
-            <tr>
-                <th>Technique Id</th>
-                <th>Recipe Id</th>
-                <th>Technique</th>
-            </tr>
-            <c:forEach items="${techniques}" var="technique" >
-                <tr>
-                    <td><c:out value="${technique.getTechniqueId()}" /></td>
-                    <td><c:out value="${technique.getRecipe().getRecipeId()}" /></td>
-                    <td><c:out value="${technique.getDescription()}" /></td>
-                    <td><a href="techniquesdelete?techniqueId=<c:out value="${technique.getTechniqueId()}"/>">Delete</a></td>
-                    <td><a href="techniquesupdate?techniqueId=<c:out value="${technique.getTechniqueId()}"/>">Update</a></td>
-                </tr>
-            </c:forEach>
-       </table>
+<div class="above-the-fold">
+	<div class="search-above-fold">
+		<h1 class="find-a-recipe">Find a Recipe</h1>
+	  <form class="above-search-form" action="findrecipes" method="post">
+      <input class="form-control mr-sm-2" type="search" name="recipename" value="${fn:escapeXml(param.recipename)}" placeholder="Search recipe by name" aria-label="Search">
+      <button class="btn btn-dark my-2 my-sm-0 button-search" type="submit">Search</button>
+      <span id="successMessage"><b>${messages.success}</b></span>
+    </form>
+	</div>
+    
+	
+</div>
 </body>
 </html>
