@@ -1,5 +1,6 @@
 CREATE SCHEMA IF NOT EXISTS RecipeApplication;
 USE RecipeApplication;
+DROP TABLE IF EXISTS Tags;
 DROP TABLE IF EXISTS Comments;
 DROP TABLE IF EXISTS Ratings;
 DROP TABLE IF EXISTS Favorites;
@@ -100,4 +101,12 @@ CREATE TABLE NutritionFacts (
   RecipeId INT,
   CONSTRAINT pk_NutritionFacts_NutritionFactsId PRIMARY KEY (NutritionFactsId),
   CONSTRAINT fk_NutritionFacts_RecipeId FOREIGN KEY (RecipeId) REFERENCES Recipes(RecipeId) ON UPDATE CASCADE ON DELETE CASCADE
+);
+CREATE TABLE Tags (
+  TagId INT AUTO_INCREMENT,
+  RecipeName VARCHAR(256),
+  RecipeId INT,
+  TagName VARCHAR(256),
+  CONSTRAINT pk_Tags_TagId PRIMARY KEY (TagId),
+  CONSTRAINT fk_Tags_RecipeId FOREIGN KEY (RecipeId) REFERENCES Recipes(RecipeId) ON UPDATE CASCADE ON DELETE CASCADE
 );
