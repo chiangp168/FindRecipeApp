@@ -306,10 +306,10 @@ public class RecipesDao {
 	public List<Recipes> getRecipesByTag(String tagName) throws SQLException {
 		List<Recipes> list = new ArrayList<Recipes>();
 		String selectRecipe =
-				"SELECT Recipes.RecipeName, Recipes.RecipeId, Recipes.UserId, Recipes.TimeToCook, Recipes.NumOfStep " +
-		        "FROM (Recipes INNER JOIN Tags ON Recipes.RecipeId=Tags.RecipeId)"+
-						 "INNER JOIN Ratings ON Recipes.RecipeId = Ratings.RecipeId " +
-				      "WHERE TagName=? ORDER BY RatingPoints LIMIT 10;";
+				"SELECT RecipeName, T.RecipeId, T.UserId, TimeToCook, NumOfStep " +
+		        "FROM (SELECT Recipes.RecipeName, Recipes.RecipeId, Recipes.UserId, Recipes.TimeToCook, Recipes.NumOfStep  FROM  Recipes INNER JOIN Tags ON Recipes.RecipeId=Tags.RecipeId WHERE TagName = ?) AS T "+
+						 "INNER JOIN Ratings ON T.RecipeId = Ratings.RecipeId GROUP BY RecipeId " +
+				      "ORDER BY AVG(RatingPoints) ASC LIMIT 10;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;

@@ -53,7 +53,7 @@ public class FindRecipesByTag extends HttpServlet {
         e.printStackTrace();
         throw new IOException(e);
       }
-      messages.put("success", "Displaying results for " + tagName);
+      messages.put("success", "Displaying results for Top 10 average ratings recipes with " + tagName + " tag");
     }
     req.setAttribute("recipes", recipes);
 
