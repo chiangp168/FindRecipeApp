@@ -302,4 +302,47 @@ public class RecipesDao {
 			}
 		}
 	}
+
+	public List<Recipes> getRecipesByTag(String tagName) throws SQLException {
+		List<Recipes> list = new ArrayList<Recipes>();
+		String selectRecipe =
+				"SELECT Recipes.RecipeName, Recipes.RecipeId, Recipes.UserId, Recipes.TimeToCook, Recipes.NumOfStep " +
+		        "FROM (Recipes INNER JOIN Tags ON Recipes.RecipeId=Tags.RecipeId)"+
+						 "INNER JOIN Ratings ON Recipes.RecipeId = Ratings.RecipeId " +
+				      "WHERE TagName=? ORDER BY RatingPoints LIMIT 10;";
+		Connection connection = null;
+		PreparedStatement selectStmt = null;
+		ResultSet results = null;
+		try {
+			connection = connectionManager.getConnection();
+			selectStmt = connection.prepareStatement(selectRecipe);
+			selectStmt.setString(1, tagName);
+			results = selectStmt.executeQuery();
+			while(results.next()) {
+				int rsrecipeId = results.getInt("RecipeId");
+				String rsrecipeName = results.getString("RecipeName");
+				int timeToCook = results.getInt("TimeToCook");
+				int numOfStep = results.getInt("NumOfStep");
+				int rsuserId = results.getInt("UserId");
+				UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao is done
+				Users rsuser = usersDao.getUsersByUserId(rsuserId);//needs double check when UsersDao is done
+				Recipes rsRecipe = new Recipes(rsrecipeId, rsrecipeName, rsuser, timeToCook, numOfStep);
+				list.add(rsRecipe);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(selectStmt != null) {
+				selectStmt.close();
+			}
+			if(results != null) {
+				results.close();
+			}
+		}
+		return list;
+	}
 }
