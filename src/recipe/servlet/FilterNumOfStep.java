@@ -51,7 +51,7 @@ public class FilterNumOfStep extends HttpServlet {
 	                e.printStackTrace();
 	                throw new IOException(e);
 	            }
-	            messages.put("success", "Displaying results that have less than " 
+	            messages.put("success", "Displaying results that have no more than " 
 	            			+ NumOfStep + " steps");
 	            // Save the previous search term, so it can be used as the default
 	            // in the input box when rendering FindRecipes.jsp.
@@ -87,7 +87,7 @@ public class FilterNumOfStep extends HttpServlet {
 	                e.printStackTrace();
 	                throw new IOException(e);
 	            }
-	            messages.put("success", "Displaying results that have less than " 
+	            messages.put("success", "Displaying results that have no more than " 
 	        			+ NumOfStep + " steps");
 	        }
         }
