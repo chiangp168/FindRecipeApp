@@ -1,5 +1,6 @@
 package recipe.dal;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -278,6 +279,54 @@ public class RecipesDao {
 					Users rsuser = usersDao.getUsersByUserId(rsuserId);//needs double check when UsersDao is done
 					
 					Recipes rsRecipe = new Recipes(rsrecipeId, rsrecipeName, rsuser, timeToCook, numOfStep);
+					list.add(rsRecipe);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw e;
+			} finally {
+				if(connection != null) {
+					connection.close();
+				}
+				if(selectStmt != null) {
+					selectStmt.close();
+				}
+				if(results != null) {
+					results.close();
+				}
+			}
+			return list;
+	}
+	
+	public List<Recipes> getRecipesByAverageRatingPoints(int aveRatingPoints) throws SQLException{
+		List<Recipes> list = new ArrayList<Recipes>();
+		String selectRecipe =
+				"select RecipeName, Recipes.RecipeId,UserId,TimeToCook, NumOfStep, avg_table.avg_rating "
+				+"from Recipes " 
+				+"inner join "
+				+"(select RecipeId,AVG(Ratings.RatingPoints) as avg_rating "
+				+"from Ratings "
+				+"group by RecipeId) as avg_table "
+				+"on Recipes.RecipeId = avg_table.RecipeId "
+				+"where avg_rating >= ?;";
+			Connection connection = null;
+			PreparedStatement selectStmt = null;
+			ResultSet results = null;
+			try {
+				connection = connectionManager.getConnection();
+				selectStmt = connection.prepareStatement(selectRecipe);
+				selectStmt.setInt(1, aveRatingPoints);
+				results = selectStmt.executeQuery();
+				
+				while(results.next()) {
+					int rsrecipeId = results.getInt("RecipeId");
+					String rsrecipeName = results.getString("RecipeName");
+					int timeToCook = results.getInt("TimeToCook");
+					int numOfStep = results.getInt("NumOfStep");
+					int rsuserId = results.getInt("UserId");
+					UsersDao usersDao = UsersDao.getInstance();//needs double check when UsersDao is done
+					Users rsuser = usersDao.getUsersByUserId(rsuserId);//needs double check when UsersDao is done
+					Recipes rsRecipe = new Recipes(rsrecipeId, rsrecipeName, rsuser,timeToCook, numOfStep);
 					list.add(rsRecipe);
 				}
 			} catch (SQLException e) {
