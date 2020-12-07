@@ -38,12 +38,13 @@ public class FilterByRatings extends HttpServlet {
         // Retrieve and validate name.
         String input = req.getParameter("ratings");
         if (input == null || input.trim().isEmpty()) {
-            messages.put("success", "Please enter a valid ratingPoints.");
+            messages.put("success", "Please enter a valid rating point.");
         } else {
-	        Integer ratings = Integer.parseInt(input);
+	        Double ratings = Double.parseDouble(input);
 	        if (ratings<0) {
-	            messages.put("success", "Please enter a valid ratingPoints.");
-	        } else {
+	            messages.put("success", "Please enter a valid rating point.");
+	        }  
+	        else {
 	            // Retrieve Recipes, and store as a message.
 	        	try {
 	                recipes = recipesDao.getRecipesByAverageRatingPoints(ratings);
@@ -51,11 +52,11 @@ public class FilterByRatings extends HttpServlet {
 	                e.printStackTrace();
 	                throw new IOException(e);
 	            }
-	            messages.put("success", "Displaying results that have more than " 
-	            			+ ratings + "points");
+	            messages.put("success", "Displaying results that have equal or more than " 
+	            			+ ratings + " points");
 	            // Save the previous search term, so it can be used as the default
 	            // in the input box when rendering FindRecipes.jsp.
-	            messages.put("previousRatings", Integer.toString(ratings));
+	            messages.put("previousRatings", Double.toString(ratings));
 	        }
         }
         req.setAttribute("recipes", recipes);
@@ -75,11 +76,11 @@ public class FilterByRatings extends HttpServlet {
 	        // Retrieve and validate name.
 	        String input = req.getParameter("ratings");
 	        if (input == null || input.trim().isEmpty()) {
-	            messages.put("success", "Please enter a valid ratingPoints.");
+	            messages.put("success", "Please enter a valid rating point.");
 	        } else {
-		        Integer ratings = Integer.parseInt(input);
+		        Double ratings = Double.parseDouble(input);
 		        if (ratings<0) {
-		            messages.put("success", "Please enter a valid ratingPoints.");
+		            messages.put("success", "Please enter a valid rating point.");
 		        } else {
 		            // Retrieve Recipes, and store as a message.
 		        	try {
@@ -88,8 +89,8 @@ public class FilterByRatings extends HttpServlet {
 		                e.printStackTrace();
 		                throw new IOException(e);
 		            }
-		            messages.put("success", "Displaying results that have more than " 
-		            			+ ratings + "points");
+		            messages.put("success", "Displaying results that have equal or more than " 
+		            			+ ratings + " points");
 		            // Save the previous search term, so it can be used as the default
 		            // in the input box when rendering FindRecipes.jsp.
 		            }

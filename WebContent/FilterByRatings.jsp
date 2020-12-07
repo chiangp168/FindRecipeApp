@@ -12,9 +12,9 @@
 </head>
 <body>
 	<form action="filterbyratings" method="post">
-		<h1>Search for Recipes having more than required points</h1>
+		<h1>Search for Recipes having equal or more than required points</h1>
 		<p>
-			<label for="ratings">Ratings More than </label>
+			<label for="ratings">Ratings Equal or More than </label>
 			<input id="ratings" name="ratings" value="${fn:escapeXml(param.ratings)}">
 		</p>
 		<p>
