@@ -298,7 +298,7 @@ public class RecipesDao {
 			return list;
 	}
 	
-	public List<Recipes> getRecipesByAverageRatingPoints(int aveRatingPoints) throws SQLException{
+	public List<Recipes> getRecipesByAverageRatingPoints(double aveRatingPoints) throws SQLException{
 		List<Recipes> list = new ArrayList<Recipes>();
 		String selectRecipe =
 				"select RecipeName, Recipes.RecipeId,UserId,TimeToCook, NumOfStep, avg_table.avg_rating "
@@ -315,7 +315,7 @@ public class RecipesDao {
 			try {
 				connection = connectionManager.getConnection();
 				selectStmt = connection.prepareStatement(selectRecipe);
-				selectStmt.setInt(1, aveRatingPoints);
+				selectStmt.setDouble(1, aveRatingPoints);
 				results = selectStmt.executeQuery();
 				
 				while(results.next()) {
