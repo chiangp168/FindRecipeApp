@@ -247,6 +247,49 @@ public class RecipesDao {
 			}
 			return list;
 	}
+
+	public List<Recipes> getRecipesByPrepTime(int prepTime) throws SQLException{
+		List<Recipes> list = new ArrayList<Recipes>();
+		String selectRecipe =
+				"SELECT * FROM Recipes WHERE TimeToCook <=?;";
+			Connection connection = null;
+			PreparedStatement selectStmt = null;
+			ResultSet results = null;
+			try {
+				connection = connectionManager.getConnection();
+				selectStmt = connection.prepareStatement(selectRecipe);
+				selectStmt.setInt(1, prepTime);
+				results = selectStmt.executeQuery();
+				
+				while(results.next()) {
+					int rsrecipeId = results.getInt("RecipeId");
+					String rsrecipeName = results.getString("RecipeName");
+					int timeToCook = results.getInt("TimeToCook");
+					int rsnumOfStep = results.getInt("NumOfStep");
+					
+					int rsuserId = results.getInt("UserId");
+					UsersDao usersDao = UsersDao.getInstance();
+					Users rsuser = usersDao.getUsersByUserId(rsuserId);
+					
+					Recipes rsRecipe = new Recipes(rsrecipeId, rsrecipeName, rsuser, timeToCook, rsnumOfStep);
+					list.add(rsRecipe);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw e;
+			} finally {
+				if(connection != null) {
+					connection.close();
+				}
+				if(selectStmt != null) {
+					selectStmt.close();
+				}
+				if(results != null) {
+					results.close();
+				}
+			}
+			return list;
+	}
 	
 	
 	
