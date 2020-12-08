@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="RecipeApplication1/WebContent/WEB-INF/resource/font-awesome.min.css">
-    <link href="./css/index.css" rel="stylesheet" type="text/css">
+    <!-- <link href="./css/index.css" rel="stylesheet" type="text/css"> -->    <link href="./css/search-results.css" rel="stylesheet" type="text/css">
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Find a Recipe</title>
 </head>
@@ -55,23 +55,28 @@
 
         <h1><span id="successMessage"><b>${messages.success}</b></span></h1>
         <c:forEach items="${recipes}" var="recipe">
-            <div class="col-sm-8">
-                <div class="card" styles={{width: '18rem', align-items: center;}}>
-                    <img class="card-img-top" src="https://picsum.photos/300/200" />
-                    <div class="card-body">
-                        <h3 class="card-title">
-                            <c:out value="${recipe.getRecipeName()}" />
-                        </h3>
-                        <p>Time to cook:
-                            <c:out value="${recipe.getTimeToCook()}" /> minutes
-                        </p>
-                        <p>Number of steps:
-                            <c:out value="${recipe.getNumOfStep()}" />
-                        </p>
-                        <a href="#" class="btn btn-primary">More...</a>
-                    </div>
-                </div>
-            </div>
+        	<div class="well search-result">
+        		<div class="row">
+		            <div class="col-lg-4">
+              			<img class="img-responsive" src="https://source.unsplash.com/400x200/?food" alt=""/>
+            		</div>
+		            <div class=" col-lg-8 title">
+		            	<h6><c:out value="${recipe.getRecipeName()}"/></h6>
+		                        
+		                <p>Time to cook:
+		                	<c:out value="${recipe.getTimeToCook()}" /> minutes
+		                </p>
+		                <p>Number of steps:
+		                	<c:out value="${recipe.getNumOfStep()}" />
+		               	</p>
+		                <a class="btn btn-info" href="recipecreate">CREATE</a>
+		                <a class="btn btn-info" href="recipeupdate?recipename=<c:out value="${recipe.getRecipeName()}"/>">UPDATE</a>
+		                <a class="btn btn-info" href="recipedelete?recipename=<c:out value="${recipe.getRecipeName()}"/>">DELETE</a>
+		                
+		            </div>
+		        </div>
+		       
+		    </div>
 
 
         </c:forEach>
