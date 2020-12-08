@@ -238,7 +238,7 @@ public class NutritionFactsDao {
 			selectStmt.setInt(1, proteinPercentage);
 			results = selectStmt.executeQuery();
 			
-			if(results.next()) {
+			while (results.next()) {
 				int nutritionFactsId = results.getInt("NutritionFactsId");
 				int recipeId = Integer.parseInt(results.getString("RecipeId"));
 				double calories = Double.parseDouble(results.getString("Calories"));

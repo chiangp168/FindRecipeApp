@@ -1,0 +1,34 @@
+@media only screen and (min-width: 600px) {
+	.above-the-fold {
+		background: url("https://www.foodiesfeed.com/wp-content/uploads/2019/04/mae-mu-oranges-ice-600x750.jpg") center center fixed;
+		margin: 0;
+		height: 600px;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+	}
+	.search-above-fold {
+		position: absolute;
+		top: 40%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+	.button-search {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	/* .success-title {
+		text-align: center;
+		align-items: center;
+		justify-content: center;
+		padding-bottom: 9px;
+		border-bottom: 1px solid #eee;
+	} */
+
+	img {
+		max-width: 50%;
+		height: auto;
+	  }
+}

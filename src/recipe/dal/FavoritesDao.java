@@ -122,7 +122,7 @@ public class FavoritesDao {
 	//get by userId
 	public List<Favorites> getFavoriteByUserId(int userId) throws SQLException{
 		List<Favorites> list = new ArrayList<Favorites>();
-		String selectFavorite=
+		String selectFavorite =
 				"SELECT * FROM Favorites WHERE UserId =?;";
 			Connection connection = null;
 			PreparedStatement selectStmt = null;
