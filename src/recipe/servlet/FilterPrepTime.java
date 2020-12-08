@@ -38,7 +38,7 @@ public class FilterPrepTime extends HttpServlet {
         // Retrieve and validate name.
         String input = req.getParameter("prepTime");
         if (input == null || input.trim().isEmpty()) {
-            messages.put("success", "Please enter a valid number of step.");
+            messages.put("success", "Please enter a valid preparation time in minutes.");
         } else {
 	        Integer prepTime = Integer.parseInt(input);
 	        if (prepTime < 0) {
@@ -51,7 +51,7 @@ public class FilterPrepTime extends HttpServlet {
 	                e.printStackTrace();
 	                throw new IOException(e);
 	            }
-	            messages.put("success", "Displaying recipes with preparation time under " 
+	            messages.put("success", "Displaying recipes with preparation time less than or equal to " 
 	            			+ prepTime + " minutes.");
 	            // Save the previous search term, so it can be used as the default
 	            // in the input box when rendering FindRecipes.jsp.
@@ -87,7 +87,7 @@ public class FilterPrepTime extends HttpServlet {
 	                e.printStackTrace();
 	                throw new IOException(e);
 	            }
-	            messages.put("success", "Displaying recipes with preparation time under " 
+	            messages.put("success", "Displaying recipes with preparation time less than or equal to " 
 	        			+ prepTime + " minutes.");
 	        }
         }

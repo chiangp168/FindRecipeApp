@@ -24,7 +24,7 @@
 		</p>
 	</form>
 	<br/>
-	<div id="numOfStep"><a href="filterNumOfStep">Search By Number Of Steps</a></div>
+	<div id="numOfStep"><a href="filterNumOfStep">Search Recipes By Number Of Steps</a></div>
 	<br/>
 	<h1>Matching Recipes</h1>
         <table border="1">
