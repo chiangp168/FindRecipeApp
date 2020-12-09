@@ -7,43 +7,83 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Find a User Using UserId</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="RecipeApplication1/WebContent/WEB-INF/resource/font-awesome.min.css">
+    <link href="./css/search-results.css" rel="stylesheet" type="text/css">
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>Find a User Using UserId</title>
 </head>
 <body>
-	<form action="finduser" method="post">
-		<h1>Search for a User by UserId</h1>
-		<p>
-			<label for="userId">UserId</label>
-			<input id="userId" name="userId" value="${fn:escapeXml(param.userId)}">
-		</p>
-		<p>
-			<input type="submit">
-			<br/><br/><br/>
-			<span id="successMessage"><b>${messages.success}</b></span>
-		</p>
-	</form>
-	<br/>
-	<div id="UserCreate"><a href="usercreate">Create Person</a></div>
-	<br/>
-	<h1>Matching User</h1>
-        <table border="1">
-            <tr>
-                <th>UserId</th>
-                <th>UserName</th>
-                <th>FirstName</th>
-                <th>LastName</th>
-                <th>Delete User</th>
-                <th>Update User</th>
-            </tr>
-            <tr>
-                <td><c:out value="${user.getUserId()}" /></td>
-                <td><c:out value="${user.getUserName()}" /></td>
-                <td><c:out value="${user.getFirstName()}" /></td>
-                <td><c:out value="${user.getLastName()}" /></td>
-                <td><a href="userdelete?userId=<c:out value="${user.getUserId()}"/>">Delete</a></td>
-                <td><a href="userupdate?userId=<c:out value="${user.getUserId()}"/>">Update</a></td>
-            </tr>
-       </table>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light"></nav>
+        <a class="navbar-brand" href="index.jsp">WFH Kitchen</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.jsp">Recipes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="CommentFind.jsp">Comments</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="RatingFind.jsp">Ratings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="FavoriteFind.jsp">Favorites</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="FindNutritionFacts.jsp">NutritionFacts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="TechniquesRead.jsp">Techniques</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="FindUser.jsp">User</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="FindPerson.jsp">User</a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+    <div class="well search-result">
+		<div class="search-above-fold">
+			<h1>Search for User By Id</h1>
+		  	<form action="finduser" method="post">
+		      <input class="form-control mr-sm-2" type="search" name="userId" value="${fn:escapeXml(param.userId)}" placeholder="Enter UserId" >
+		      <button class="btn btn-dark my-2 my-sm-0 button-search" type="submit">Search</button>
+		      <span id="successMessage"><b>${messages.success}</b></span>
+	    	</form>
+		</div>
+	</div>
+        <div class="row">
+            <div class="col-lg-4">
+              <img class="img-responsive" src="https://source.unsplash.com/400x200/?user" alt=""/>
+            </div>
+            <div class=" col-lg-8 title">
+              <h6>User Id: <c:out value="${user.getUserId()}"/></h6>
+              <p>User Name:
+                <c:out value="${user.getUserName()}" />
+              </p>
+              <p>User First Name: 
+                <c:out value="${user.getFirstName()}"/>
+              </p>
+              <p>User Last Name: 
+                <c:out value="${user.getLastName()}" />
+              </p>
+
+              <a class="btn btn-info" href="usercreate">CREATE</a>
+		      <a class="btn btn-info" href="userupdate?userId=<c:out value="${user.getUserId()}"/>">UPDATE</a>
+		      <a class="btn btn-info" href="userdelete?userId=<c:out value="${user.getUserId()}"/>">DELETE</a>
+
+            </div>
 </body>
 </html>
