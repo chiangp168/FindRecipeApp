@@ -40,20 +40,20 @@ public class CommentDelete extends HttpServlet {
     // Retrieve and validate name.
     Integer commentId = Integer.valueOf(req.getParameter("commentId"));
     if (commentId == null) {
-      messages.put("title", "Invalid CommentId");
+      messages.put("success", "Invalid CommentId");
     } else {
       try {
         Comments comments = commentsDao.getCommentById(commentId);
         if (comments == null) {
-          messages.put("title", "Invalid CommentId");
+          messages.put("success", "Invalid CommentId");
         } else {
           comments = commentsDao.deleteById(comments);
           // Update the message.
           if (comments == null) {
-            messages.put("title", "Successfully deleted comment with comment id " + commentId);
+            messages.put("success", "Successfully deleted comment with comment id " + commentId);
             messages.put("disableSubmit", "true");
           } else {
-            messages.put("title", "Failed to delete comment with comment id" + commentId);
+            messages.put("success", "Failed to delete comment with comment id" + commentId);
             messages.put("disableSubmit", "false");
           }
         }
