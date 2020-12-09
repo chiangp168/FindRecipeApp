@@ -46,6 +46,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="TechniquesRead.jsp">Techniques</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="IngredientsSearch.jsp">Ingredient Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="FindUser.jsp">User</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="FindPerson.jsp">Person</a>
+                </li>
             </ul>
 
         </div>
@@ -72,7 +81,7 @@
 	    	</form>
 		</div>
 	</div>
-<%-- <form action="findrecipesbytag" method="post">
+    <form action="findrecipesbytag" method="post">
     <h1>Search for Recipes by Tag</h1>
     <p>
         <input type="radio" id="vegetarian" name="tag" value="vegetarian" checked>
