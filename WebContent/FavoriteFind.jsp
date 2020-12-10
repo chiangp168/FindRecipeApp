@@ -76,7 +76,6 @@
 	    	</form>
 		</div>
 	</div>
-	
 	<c:forEach items="${favorites}" var="favorite" >
 	  <div class="well search-result">
         <div class="row">
@@ -92,13 +91,12 @@
                 <c:out value="${favorite.getRecipe().getRecipeName()}" />
               </p>
               <p>User Id: 
-                <c:out value="${favorite.getUser().getUserId()}" />
+                <c:out value="${favorite.getUser().getUserId()}"/>
               </p>
-
+              		      
             </div>
         </div>
       </div>
-	</c:forEach>
-
+	</c:forEach> 
 </body>
 </html>
