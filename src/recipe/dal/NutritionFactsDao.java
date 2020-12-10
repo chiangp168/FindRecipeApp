@@ -227,7 +227,7 @@ public class NutritionFactsDao {
 		
 		String selectNutritionFact =
 			"SELECT RecipeId, Calories, Total_fat, Sugar, Sodium, Protein, Saturated_fat, Carb, NutritionFactsId"
-			+ " FROM NutritionFacts WHERE Protein=?;";
+			+ " FROM NutritionFacts WHERE Protein=? LIMIT 10;";
 		
 		Connection connection = null;
 		PreparedStatement selectStmt = null;

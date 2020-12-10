@@ -28,7 +28,7 @@
                     <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.jsp">Recipes</a>
+                    <a class="nav-link" href="FilterNumOfStep.jsp">Easy Recipes</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="FindRecipesByTag.jsp">Dietary Restriction</a>
@@ -37,7 +37,7 @@
                     <a class="nav-link" href="CommentFind.jsp">Comments</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="RatingFind.jsp">Ratings</a>
+                    <a class="nav-link" href="FilterByRatings.jsp">Ratings</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="FavoriteFind.jsp">Favorites</a>
@@ -47,6 +47,15 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="TechniquesRead.jsp">Techniques</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="IngredientsSearch.jsp">Ingredient Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="FindUser.jsp">User</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="FindPerson.jsp">Person</a>
                 </li>
             </ul>
 

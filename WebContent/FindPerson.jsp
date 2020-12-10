@@ -49,7 +49,16 @@
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="FindPerson.jsp">User</a>
-			</li>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="IngredientsSearch.jsp">Ingredient Search</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="FindUser.jsp">User</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="FindPerson.jsp">Person</a>
+            </li>
         </ul>
 
     </div>

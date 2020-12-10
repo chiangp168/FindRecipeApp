@@ -21,29 +21,42 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="index.jsp">Recipes</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="FindRecipesByTag.jsp">Dietary Restriction</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="CommentFind.jsp">Comments</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="RatingFind.jsp">Ratings</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="FavoriteFind.jsp">Favorites</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="FindNutritionFacts.jsp">NutritionFacts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="TechniquesRead.jsp">Techniques</a>
-            </li>
+                    <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="FilterNumOfStep.jsp">Easy Recipes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="FindRecipesByTag.jsp">Dietary Restriction</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="FilterPrepTime.jsp">Fast & Delicious</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="CommentFind.jsp">Comments</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="FilterByRatings.jsp">Ratings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="FavoriteFind.jsp">Favorites</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="FindNutritionFacts.jsp">NutritionFacts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="TechniquesRead.jsp">Techniques</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="IngredientsSearch.jsp">Ingredient Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="FindUser.jsp">User</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="FindPerson.jsp">Person</a>
+                </li>
         </ul>
 
     </div>

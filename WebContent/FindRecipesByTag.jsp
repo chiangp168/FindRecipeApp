@@ -22,11 +22,11 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                
                     <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.jsp">Recipes</a>
+                    <a class="nav-link" href="FilterNumOfStep.jsp">Easy Recipes</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="FindRecipesByTag.jsp">Dietary Restriction</a>
@@ -35,7 +35,7 @@
                     <a class="nav-link" href="CommentFind.jsp">Comments</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="RatingFind.jsp">Ratings</a>
+                    <a class="nav-link" href="FilterByRatings.jsp">Ratings</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="FavoriteFind.jsp">Favorites</a>
@@ -46,6 +46,16 @@
                 <li class="nav-item">
                     <a class="nav-link" href="TechniquesRead.jsp">Techniques</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="IngredientsSearch.jsp">Ingredient Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="FindUser.jsp">User</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="FindPerson.jsp">Person</a>
+                </li>
+                
             </ul>
 
         </div>
@@ -72,26 +82,7 @@
 	    	</form>
 		</div>
 	</div>
-<%-- <form action="findrecipesbytag" method="post">
-    <h1>Search for Recipes by Tag</h1>
-    <p>
-        <input type="radio" id="vegetarian" name="tag" value="vegetarian" checked>
-        <label for="vegetarian">Vegetarian</label><br>
-        <input type="radio" id="low-fat" name="tag" value="low-fat">
-        <label for="low-fat">Low Fat</label><br>
-        <input type="radio" id="low-sodium" name="tag" value="low-sodium">
-        <label for="low-sodium">Low Sodium</label><br>
-        <input type="radio" id="low-carb" name="tag" value="low-carb">
-        <label for="low-carb">Low Carb</label><br>
-        <input type="radio" id="low-calorie" name="tag" value="low-calorie">
-        <label for="low-calorie">Low Calorie</label><br>
-    </p>
-    <p>
-        <input type="submit">
-        <br/><br/><br/>
-        <span id="successMessage"><b>${messages.success}</b></span>
-    </p>
-</form> --%>
+
 	<c:forEach items="${recipes}" var="recipe" >
 	  <div class="well search-result">
         <div class="row">
