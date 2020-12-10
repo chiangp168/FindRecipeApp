@@ -208,7 +208,7 @@ public class RecipesDao {
 	public List<Recipes> getRecipesByNumOfStep(int numOfStep) throws SQLException{
 		List<Recipes> list = new ArrayList<Recipes>();
 		String selectRecipe =
-				"SELECT * FROM Recipes WHERE NumOfStep <=?;";
+				"SELECT * FROM Recipes WHERE NumOfStep <=? LIMIT 10;";
 			Connection connection = null;
 			PreparedStatement selectStmt = null;
 			ResultSet results = null;
@@ -251,7 +251,7 @@ public class RecipesDao {
 	public List<Recipes> getRecipesByPrepTime(int prepTime) throws SQLException{
 		List<Recipes> list = new ArrayList<Recipes>();
 		String selectRecipe =
-				"SELECT * FROM Recipes WHERE TimeToCook <=?;";
+				"SELECT * FROM Recipes WHERE TimeToCook <=? LIMIT 10;";
 			Connection connection = null;
 			PreparedStatement selectStmt = null;
 			ResultSet results = null;
@@ -351,7 +351,8 @@ public class RecipesDao {
 				+"from Ratings "
 				+"group by RecipeId) as avg_table "
 				+"on Recipes.RecipeId = avg_table.RecipeId "
-				+"where avg_rating >= ?;";
+				+"where avg_rating >= ? "
+				+ "limit 10;";
 			Connection connection = null;
 			PreparedStatement selectStmt = null;
 			ResultSet results = null;
