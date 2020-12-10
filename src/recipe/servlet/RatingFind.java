@@ -39,7 +39,7 @@ public class RatingFind extends HttpServlet {
         // firstname is retrieved from the URL query string.
         String ratingPoint = req.getParameter("ratingPoint");
         if (ratingPoint == null || ratingPoint.trim().isEmpty()) {
-            messages.put("success", "Please enter a valid ratingPoint.");
+            messages.put("success", "Please enter a valid rating Point.");
         } else {
         	// Retrieve BlogUsers, and store as a message.
         	try {
@@ -70,7 +70,7 @@ public class RatingFind extends HttpServlet {
 	        // firstname is retrieved from the URL query string.
 	        String ratingPoint = req.getParameter("ratingPoint");
 	        if (ratingPoint == null || ratingPoint.trim().isEmpty()) {
-	            messages.put("success", "Please enter a valid ratingPoint.");
+	            messages.put("success", "Please enter a valid rating Point.");
 	        } else {
 	        	// Retrieve BlogUsers, and store as a message.
 	        	try {

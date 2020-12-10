@@ -102,9 +102,7 @@
             </div>
         </div>
       </div>
-	</c:forEach>
-	
-	<a class='btn btn-dark' href="RatingFind.jsp">Search for a rating</a>
+ </c:forEach>
 
 </body>
 </html>

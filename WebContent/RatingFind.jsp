@@ -48,35 +48,39 @@
             </ul>
 
         </div>
-    </nav>
-	<form action="ratingfind" method="post">
-		<h1>Search for A Rating By RatingPoints</h1>
-		<p>
-			<label for="ratingPoint">RatingPoints</label>
-			<input id="ratingPoint" name="ratingPoint" value="${fn:escapeXml(param.ratingPonit)}">
-		</p>
-		<p>
-			<input type="submit">
-			<br/><br/><br/>
-			<span id="successMessage"><b>${messages.success}</b></span>
-		</p>
-	</form>
-	<h1>Matching Ratings</h1>
-        <table border="1">
-            <tr>
-                <th>RatingPoints</th>
-                <th>RecipeName</th>
-                <th>RecipeId</th>
-                <th>UserId</th>
-                <th>RatingId</th>
-            </tr>
-            <c:forEach items="${ratings}" var="rating" >
-                <tr>
-                    <td><c:out value="${rating.getRatingPoints()}" /></td>
-                    <td><c:out value="${rating.getRecipes().getRecipeName()}" /></td>
-                    <td><c:out value="${rating.getRecipes().getRecipeId()}" /></td>
-                    <td><c:out value="${rating.getUser().getUserId()}" /></td>
-                    <td><c:out value="${rating.getRatingId()}" /></td>
-                </tr>
-            </c:forEach>
-       </table>
+    </nav>     
+    <div class="well search-result">
+		<div class="search-above-fold">
+			<h1>Search for a Rating by Rating Points</h1>
+		  	<form action="ratingfind" method="post">
+		      <input class="form-control mr-sm-2" type="search" name="ratings" value="${fn:escapeXml(param.ratings)}" placeholder="Enter minimum rating" aria-label="Search">
+		      <button class="btn btn-dark my-2 my-sm-0 button-search" type="submit">Search</button>
+		      <span id="successMessage"><b>${messages.success}</b></span>
+	    	</form>
+		</div>
+	</div>
+	
+	<c:forEach items="${ratings}" var="rating" >
+	  <div class="well search-result">
+        <div class="row">
+            <div class="col-lg-4">
+              <img class="img-responsive" src="https://source.unsplash.com/400x200/?food?fruit" alt=""/>
+            </div>
+            <div class=" col-lg-8 title">
+              <h6><c:out value="${rating.getRecipes().getRecipeName()}"/></h6>
+              <p>UserId: 
+                <c:out value="${rating.getUser().getUserId()}" />
+              </p>
+              <p>RatingPoints: 
+                <c:out value="${rating.getRatingPoints()}" />
+              </p>
+              <a class="btn btn-info" href="recipecreate">CREATE</a>
+		      <a class="btn btn-info" href="recipedelete?recipename=<c:out value="${recipe.getRecipeName()}"/>">UPDATE</a>
+		      <a class="btn btn-info" href="recipedelete?recipename=<c:out value="${recipe.getRecipeName()}"/>">DELETE</a>
+		      
+            </div>
+        </div>
+      </div>
+	</c:forEach>
+</body>
+</html>
