@@ -96,7 +96,7 @@
               
             
               <a class="btn btn-info" href="recipecreate">CREATE</a>
-		      <a class="btn btn-info" href="recipedelete?recipename=<c:out value="${recipe.getRecipeName()}"/>">UPDATE</a>
+		      <a class="btn btn-info" href="recipeupdate?recipename=<c:out value="${recipe.getRecipeName()}"/>">UPDATE</a>
 		      <a class="btn btn-info" href="recipedelete?recipename=<c:out value="${recipe.getRecipeName()}"/>">DELETE</a>
 		      
             </div>
