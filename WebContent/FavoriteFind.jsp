@@ -49,7 +49,18 @@
 
         </div>
     </nav>
-	<form action="favoritefind" method="post">
+    
+    <div class="well search-result">
+		<div class="search-above-fold">
+			<h1>Search for favorites</h1>
+		  	<form action="favoritefind" method="post">
+		      <input class="form-control mr-sm-2" type="search" name="userId" value="${fn:escapeXml(param.userId)}" placeholder="Enter UserId" >
+		      <button class="btn btn-dark my-2 my-sm-0 button-search" type="submit">Search</button>
+		      <span id="successMessage"><b>${messages.success}</b></span>
+	    	</form>
+		</div>
+	</div>
+	<%-- <form action="favoritefind" method="post">
 		<h1>Search for a Favorite By UserId</h1>
 		<p>
 			<label for="userId">UserId</label>
@@ -60,7 +71,7 @@
 			<br/><br/><br/>
 			<span id="successMessage"><b>${messages.success}</b></span>
 		</p>
-	</form>
+	</form> --%>
 	<h1>Matching Favorites</h1>
         <table border="1">
             <tr>
@@ -78,5 +89,36 @@
                 </tr>
             </c:forEach>
        </table>
+       
+ <%-- <c:forEach items="${favorites}" var="favorite" >
+	  <div class="well search-result">
+        <div class="row">
+            <div class="col-lg-4">
+              <img class="img-responsive" src="https://source.unsplash.com/400x200/?comment" alt=""/>
+            </div>
+            <div class=" col-lg-8 title">
+              <h6>CommentId <c:out value="${comment.getCommentId()}"/></h6>
+              <p>Favorite Id:
+                <c:out value="${favorite.getFavoriteId()}" />
+              </p>
+              <p>Recipe Id: 
+                <c:out value="${favorite.getRecipe().getRecipeId()}"/>
+              </p>
+              <p>Recipe Name: 
+                <c:out value="${favorite.getRecipe().getRecipeName()}" />
+              </p>
+              <p>User Id: 
+                <c:out value="${favorite.getUser().getUserId()}"/>
+              </p>
+              
+            
+              <a class="btn btn-info" href="commentscreate">CREATE</a>
+		      <a class="btn btn-info" href="commentsupdate?commentId=<c:out value="${comment.getCommentId()}"/>">UPDATE</a>
+		      <a class="btn btn-info" href="commentsdelete?commentId=<c:out value="${comment.getCommentId()}"/>">DELETE</a>
+		      
+            </div>
+        </div>
+      </div>
+	</c:forEach> --%>
 </body>
 </html>
