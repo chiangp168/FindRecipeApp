@@ -54,7 +54,7 @@
 		<div class="search-above-fold">
 			<h1>Search for a Rating by Rating Points</h1>
 		  	<form action="ratingfind" method="post">
-		      <input class="form-control mr-sm-2" type="search" name="ratings" value="${fn:escapeXml(param.ratings)}" placeholder="Enter minimum rating" aria-label="Search">
+		      <input class="form-control mr-sm-2" type="search" name="ratingPoint" value="${fn:escapeXml(param.ratingPoint)}" placeholder="Enter minimum rating" aria-label="Search">
 		      <button class="btn btn-dark my-2 my-sm-0 button-search" type="submit">Search</button>
 		      <span id="successMessage"><b>${messages.success}</b></span>
 	    	</form>
