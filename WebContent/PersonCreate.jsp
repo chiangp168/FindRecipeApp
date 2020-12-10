@@ -49,7 +49,7 @@
 				<a class="nav-link" href="FindUser.jsp">User</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="FindPerson.jsp">User</a>
+				<a class="nav-link" href="FindPerson.jsp">Person</a>
 			</li>
 		</ul>
 
@@ -58,7 +58,7 @@
  <div class='container'>
 	<div class="row">
 		<div class="col-lg-12">
-			<h3 class="text-dark">Create a Comment</h3>
+			<h3 class="text-dark">Create a Person</h3>
 		</div>
 	</div>
 
